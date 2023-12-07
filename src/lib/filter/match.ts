@@ -1,5 +1,5 @@
 import { FileFilterItem } from "./FileFilterItem"
-import { getExtension } from "@/utils/file"
+import { getExtension, getFilenameWithoutExtension } from "@/utils/file"
 
 export function isMatch(file: FileItem, filter: FileFilterItem): boolean {
   let match = isFilenameMatch(file, filter)
@@ -26,7 +26,7 @@ function isFilenameMatch(file: FileItem, filter: FileFilterItem): boolean | null
     return null
   }
 
-  let filename = file.name
+  let filename = getFilenameWithoutExtension(file.name)
   let pattern = filter.stringValue
   if (!filter.caseSensitive) {
     filename = filename.toLowerCase()

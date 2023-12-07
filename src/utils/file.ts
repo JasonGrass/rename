@@ -71,6 +71,14 @@ async function handleDirectoryEntry(
 }
 
 /**
+ * 获取文件名，不包括后缀名
+ */
+export function getFilenameWithoutExtension(filename: string) {
+  const index = filename.lastIndexOf(".")
+  return index === -1 ? filename : filename.substring(0, index)
+}
+
+/**
  * 获取文件后缀名，返回值包括 "."
  */
 export function getExtension(filename: string) {
