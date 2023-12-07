@@ -53,7 +53,7 @@ import {
   matchOptions,
   stringPredicateOptions,
   numberPredicateOptions
-} from "./filter.define"
+} from "./filter.const"
 
 function nameOfType(type: FileFilterType) {
   return filterTypeOptions.find((item) => item.value === type)?.label

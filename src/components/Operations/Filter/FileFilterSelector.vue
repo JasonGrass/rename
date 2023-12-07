@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { filterTypeOptions, matchOptions, stringPredicateOptions, numberPredicateOptions } from '@/lib/filter/filter.define';
+import { filterTypeOptions, matchOptions, stringPredicateOptions, numberPredicateOptions } from '@/lib/filter/filter.const';
 import { FileFilterItem } from '@/lib/filter/FileFilterItem';
 
 // 包含还是排除
@@ -163,5 +163,3 @@ const onSubmit = () => {
 }
 </style>
 
-../../../lib/filter.define
-@/lib/filter/filter.define
