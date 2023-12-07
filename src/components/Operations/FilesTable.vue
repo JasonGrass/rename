@@ -8,7 +8,7 @@
 
     <vxe-table :data="filteredFiles" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件">
       <vxe-column type="seq" title="序号" width="60" align="center"></vxe-column>
-      <vxe-column field="name" title="文件名" sortable align="right"></vxe-column>
+      <vxe-column field="name" title="文件名" sortable align="left"></vxe-column>
       <vxe-column :visible="!isOnlyPreview" field="modifyTime" :formatter="timeFormater" title="修改时间" width="180" sortable
         align="center"></vxe-column>
       <!-- <vxe-column :visible="!isOnlyPreview" field="createTime" :formatter="timeFormater" title="创建时间" width="180" sortable
@@ -16,7 +16,7 @@
       <vxe-column :visible="!isOnlyPreview" field="size" :formatter="sizeFormatter" title="大小" width="100" sortable
         align="center"></vxe-column>
       <vxe-column :visible="isShowFolder && !isOnlyPreview" field="folder" title="目录" sortable align="right"></vxe-column>
-      <vxe-column field="preview" title="预览" align="right"></vxe-column>
+      <vxe-column field="preview" title="预览" align="left"></vxe-column>
 
     </vxe-table>
 

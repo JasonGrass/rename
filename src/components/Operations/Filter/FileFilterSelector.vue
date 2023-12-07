@@ -138,8 +138,7 @@ const onSubmit = () => {
   display: flex;
   align-items: center;
 
-  border-top: 1px solid #eee;
-  padding: 8px 0 0 0;
+  padding: 4px 0 0 0;
 
   &>div,
   label,
