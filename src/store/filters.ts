@@ -26,5 +26,22 @@ export const useFilterStore = defineStore("filters", () => {
     })
   }
 
-  return { filters, addFilter, removeFilter }
+  function filter(file: FileItem): boolean {
+    const includeFilters = filters.value.filter((filter) => filter.type === "include")
+    const excludeFilters = filters.value.filter((filter) => filter.type === "exclude")
+
+    let includeMatch = true
+    let excludeMatch = false
+
+    if (includeFilters.length > 0) {
+      includeMatch = includeFilters.some((filter) => filter.match(file))
+    }
+    if (excludeFilters.length > 0) {
+      excludeMatch = excludeFilters.some((filter) => filter.match(file))
+    }
+
+    return includeMatch && !excludeMatch
+  }
+
+  return { filters, addFilter, removeFilter, filter }
 })

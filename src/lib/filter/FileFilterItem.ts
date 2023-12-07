@@ -1,3 +1,12 @@
+import {
+  filterTypeOptions,
+  matchOptions,
+  stringPredicateOptions,
+  numberPredicateOptions
+} from "./filter.const"
+
+import { isMatch } from "./match"
+
 export class FileFilterItem {
   public type: FileFilterType = "include"
   public prop: FileFilterProp = undefined
@@ -7,7 +16,9 @@ export class FileFilterItem {
   public caseSensitive: boolean = false
   public sizeUnit: SizeUnit = undefined
 
-  constructor() {}
+  public match(file: FileItem): boolean {
+    return isMatch(file, this)
+  }
 
   public toString() {
     if (this.prop === "filename" || this.prop === "extension") {
@@ -47,13 +58,6 @@ export class FileFilterItem {
     return item
   }
 }
-
-import {
-  filterTypeOptions,
-  matchOptions,
-  stringPredicateOptions,
-  numberPredicateOptions
-} from "./filter.const"
 
 function nameOfType(type: FileFilterType) {
   return filterTypeOptions.find((item) => item.value === type)?.label

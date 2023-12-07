@@ -6,7 +6,7 @@
       <span v-show="Boolean(total)">{{ selectedCount }} / {{ total }}</span>
     </div>
 
-    <vxe-table :data="files" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件">
+    <vxe-table :data="filteredFiles" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件">
       <vxe-column type="seq" title="序号" width="60" align="center"></vxe-column>
       <vxe-column field="name" title="文件名" sortable align="right"></vxe-column>
       <vxe-column :visible="!isOnlyPreview" field="modifyTime" :formatter="timeFormater" title="修改时间" width="180" sortable
@@ -31,7 +31,7 @@ import { useFileStore } from '@/store/files';
 import { storeToRefs } from "pinia";
 
 const fileStore = useFileStore()
-const { selectedCount, total, files } = storeToRefs(fileStore)
+const { selectedCount, total, files, filteredFiles } = storeToRefs(fileStore)
 
 const sizeFormatter: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => {
   // {cellValue, column, row, rowIndex}

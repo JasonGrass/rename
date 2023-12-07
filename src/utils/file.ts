@@ -70,6 +70,14 @@ async function handleDirectoryEntry(
   return files
 }
 
+/**
+ * 获取文件后缀名，返回值包括 "."
+ */
+export function getExtension(filename: string) {
+  const index = filename.lastIndexOf(".")
+  return index === -1 ? "" : filename.substring(index)
+}
+
 function buildFile(
   file: File,
   folder: string,
