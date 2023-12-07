@@ -5,19 +5,30 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElMenu: typeof import('element-plus/es')['ElMenu']
-    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElTable: typeof import('element-plus/es')['ElTable']
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    FilesTable: typeof import('./components/Operations/FilesTable.vue')['default']
-    HandlerMenu: typeof import('./components/HandlerMenu.vue')['default']
-    Header: typeof import('./components/Header.vue')['default']
-    Operations: typeof import('./components/Operations.vue')['default']
-    OperationWrapper: typeof import('./components/OperationWrapper.vue')['default']
+    ElAlert: typeof import("element-plus/es")["ElAlert"]
+    ElButton: typeof import("element-plus/es")["ElButton"]
+    ElCheckbox: typeof import("element-plus/es")["ElCheckbox"]
+    ElCheckboxButton: typeof import("element-plus/es")["ElCheckboxButton"]
+    ElDatePicker: typeof import("element-plus/es")["ElDatePicker"]
+    ElIcon: typeof import("element-plus/es")["ElIcon"]
+    ElInput: typeof import("element-plus/es")["ElInput"]
+    ElInputNumber: typeof import("element-plus/es")["ElInputNumber"]
+    ElMenu: typeof import("element-plus/es")["ElMenu"]
+    ElMenuItem: typeof import("element-plus/es")["ElMenuItem"]
+    ElOption: typeof import("element-plus/es")["ElOption"]
+    ElSelect: typeof import("element-plus/es")["ElSelect"]
+    ElTable: typeof import("element-plus/es")["ElTable"]
+    ElTableColumn: typeof import("element-plus/es")["ElTableColumn"]
+    ElTag: typeof import("element-plus/es")["ElTag"]
+    FileFilter: typeof import("./components/Operations/Filter/FileFilter.vue")["default"]
+    FileFilterSelector: typeof import("./components/Operations/Filter/FileFilterSelector.vue")["default"]
+    FilesFilter: typeof import("./components/Operations/Filter/FilesFilter.vue")["default"]
+    FilesTable: typeof import("./components/Operations/FilesTable.vue")["default"]
+    HandlerMenu: typeof import("./components/HandlerMenu.vue")["default"]
+    Header: typeof import("./components/Header.vue")["default"]
+    Operations: typeof import("./components/Operations.vue")["default"]
+    OperationWrapper: typeof import("./components/OperationWrapper.vue")["default"]
   }
 }
