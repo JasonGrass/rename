@@ -15,7 +15,18 @@ export const useFileStore = defineStore("files", () => {
     if (items.length === 0) {
       return
     }
-    files.value.push(...items)
+
+    for (const item of items) {
+      const same = files.value.find((f) => f.hash === item.hash)
+      if (same) {
+        same.name = item.name
+        same.modifyTime = item.modifyTime
+        same.size = item.size
+        ElMessage.warning(`文件已存在 \"${item.name}\"`)
+      } else {
+        files.value.push(item)
+      }
+    }
   }
 
   function renamePreview(rename: (item: FileItem) => string) {
