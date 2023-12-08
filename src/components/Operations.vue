@@ -9,11 +9,7 @@
     </OperationWrapper>
 
     <OperationWrapper>
-      <div>
-        <el-button>执行</el-button>
-        <el-button>清空</el-button>
-        <el-button>帮助</el-button>
-      </div>
+      <ActionContainer></ActionContainer>
     </OperationWrapper>
 
     <OperationWrapper title="文件列表/结果预览">

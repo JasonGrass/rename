@@ -58,4 +58,10 @@ interface FileItem {
    * 加载文件时，根据文件信息计算出来的 hash 值
    */
   hash: string
+
+  /**
+   * 重命名错误原因
+  */
+  error: string
+
 }
