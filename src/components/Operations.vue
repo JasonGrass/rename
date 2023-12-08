@@ -5,11 +5,7 @@
     </OperationWrapper>
 
     <OperationWrapper v-if="Boolean(currentHandler)" :canFold="true" :title="currentHandler?.title">
-      <div>
-        <KeepAlive>
-          <component :is="currentHandler?.component" @submit="onRenameHandlerSubmit"></component>
-        </KeepAlive>
-      </div>
+      <HandlerContainer :currentHandler="currentHandler"></HandlerContainer>
     </OperationWrapper>
 
     <OperationWrapper>
@@ -28,19 +24,18 @@
 </template>
 
 <script lang="ts" setup>
-
-import ReplaceHandler from '@/components/Handlers/replace/ReplaceHandler';
+import HandlerFactory from '@/components/Handlers/HandlerFactory';
+const handlers = HandlerFactory.handlers
 
 const currentHandler = ref<IRenameHandler>()
-
-const onRenameHandlerSubmit = (options: any) => {
-  currentHandler.value?.rename(options)
-}
-
-onMounted(() => {
-  currentHandler.value = ReplaceHandler
+watch(handlers, () => {
+  const current = handlers.find(h => h.active)
+  currentHandler.value = current
 })
 
+onMounted(() => {
+  currentHandler.value = handlers[0]
+})
 
 </script>
 

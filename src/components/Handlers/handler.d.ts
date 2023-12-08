@@ -1,10 +1,25 @@
 interface IRenameHandler {
   title: string
+  active: boolean
+  enable: boolean
   component: Component
-  rename<T>(options: T)
+  rename(ctx: IRenameContext, options?: T)
+  setOptions(options: T)
 }
 
-interface IReplaceHandlerOptions {
-  from: string
-  to: string
+interface IRenameContext {
+  /**
+   * 文件名，不包含后缀
+   */
+  name: string
+
+  /**
+   * 后缀名，包含 .
+   */
+  extension: string
+
+  /**
+   * 文件
+   */
+  file: FileItem
 }

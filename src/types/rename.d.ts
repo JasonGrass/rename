@@ -48,4 +48,9 @@ interface FileItem {
    * 文件处理句柄
    */
   handle: FileSystemFileHandle
+
+  /**
+   * 加载文件时，根据文件信息计算出来的 hash 值
+   */
+  hash: string
 }

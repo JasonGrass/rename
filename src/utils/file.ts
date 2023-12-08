@@ -1,3 +1,5 @@
+import { md5 } from "js-md5"
+
 /**
  * 加载单个文件
  */
@@ -97,14 +99,20 @@ function buildFile(
     modifyTime: file.lastModified,
     size: file.size,
     type: file.type,
-    preview: "",
+    preview: file.name,
     selected: true,
     folder: folder,
     parent: parent,
-    handle
+    handle,
+    hash: calcHash(file, folder)
   }
 }
 
 function isUserCancel(error: Error) {
   return error instanceof DOMException && error.code === 20 && error.name === "AbortError"
+}
+
+function calcHash(file: File, folder: string) {
+  const s = `${file.name}${file.size}${file.lastModified}${folder}`
+  return md5(s)
 }

@@ -11,6 +11,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "element-plus": "^2.4.3",
+    "js-md5": "^0.8.3",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.2.47",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.152",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20.10.3",
     "@types/wicg-file-system-access": "^2023.10.4",
     "@vitejs/plugin-vue": "^4.1.0",

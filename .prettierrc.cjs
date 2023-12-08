@@ -7,7 +7,7 @@ module.exports = {
   trailingComma: "none",
   bracketSpacing: true,
   bracketSameLine: true,
-  importOrder: ["<THIRD_PARTY_MODULES>", ".*.css$", "@/(.*)", "^[./]"],
+  importOrder: ["vue", "<THIRD_PARTY_MODULES>", ".*.css$", "@/(.*)", "^[./]"],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true
 }

@@ -48,10 +48,6 @@ const timeFormater: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => 
 const isShowFolder = ref(false)
 const isOnlyPreview = ref(false)
 
-watch(files.value, () => {
-  console.log(files)
-})
-
 </script>
 
 <style lang="less" scoped>
