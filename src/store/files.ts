@@ -18,5 +18,11 @@ export const useFileStore = defineStore("files", () => {
     files.value.push(...items)
   }
 
-  return { files, filteredFiles, selectedCount, total, addFiles }
+  function renamePreview(rename: (item: FileItem) => string) {
+    for (const file of filteredFiles.value) {
+      file.preview = rename(file)
+    }
+  }
+
+  return { files, filteredFiles, selectedCount, total, addFiles, renamePreview }
 })

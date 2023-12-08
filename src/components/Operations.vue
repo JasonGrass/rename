@@ -4,8 +4,12 @@
       <FileFilter></FileFilter>
     </OperationWrapper>
 
-    <OperationWrapper :canFold="true" title="重命名配置">
-      <div>xxxxxxxxxxxxxxx</div>
+    <OperationWrapper v-if="Boolean(currentHandler)" :canFold="true" :title="currentHandler?.title">
+      <div>
+        <KeepAlive>
+          <component :is="currentHandler?.component" @submit="onRenameHandlerSubmit"></component>
+        </KeepAlive>
+      </div>
     </OperationWrapper>
 
     <OperationWrapper>
@@ -24,6 +28,19 @@
 </template>
 
 <script lang="ts" setup>
+
+import ReplaceHandler from '@/components/Handlers/replace/ReplaceHandler';
+
+const currentHandler = ref<IRenameHandler>()
+
+const onRenameHandlerSubmit = (options: any) => {
+  currentHandler.value?.rename(options)
+}
+
+onMounted(() => {
+  currentHandler.value = ReplaceHandler
+})
+
 
 </script>
 
