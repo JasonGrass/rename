@@ -31,6 +31,8 @@ export const useFileStore = defineStore("files", () => {
       throw new Error("重命名拒绝执行，存在非法文件名称")
     }
 
+    let success = 0
+    let fail = 0
     for (const file of files) {
       try {
         file.error = ""
@@ -39,10 +41,15 @@ export const useFileStore = defineStore("files", () => {
         file.name = nf.name
         file.modifyTime = nf.lastModified
         file.size = nf.size
+        success += 1
       } catch (e: any) {
-        file.error = typeof e === "string" ? e : e instanceof Error ? e.message : e.toString()
+        console.error("重命名失败", file.name, e)
+        file.error = typeof e === "string" ? e : e instanceof Error ? e.message : `未知错误 ${e}`
+        fail += 1
       }
     }
+
+    return [success, fail]
   }
 
   return { files, filteredFiles, selectedCount, total, addFiles, renamePreview, renameExecute }

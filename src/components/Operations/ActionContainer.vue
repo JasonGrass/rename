@@ -12,13 +12,17 @@ import { useFileStore } from '@/store/files';
 const fileStore = useFileStore()
 
 const onExecute = async () => {
-
   try {
-    await fileStore.renameExecute()
+    const [success, fail] = await fileStore.renameExecute()
+    if (success > 0) {
+      ElMessage.success(`成功修改 ${success} 个文件的文件名`)
+    }
+    if (fail > 0) {
+      ElMessage.error(`有 ${fail} 个文件重命名失败`)
+    }
   } catch (error: any) {
     ElMessage.error(error.message)
   }
-
 }
 
 </script>
