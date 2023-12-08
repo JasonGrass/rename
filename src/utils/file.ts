@@ -116,3 +116,22 @@ function calcHash(file: File, folder: string) {
   const s = `${file.name}${file.size}${file.lastModified}${folder}`
   return md5(s)
 }
+
+/**
+ * 是否为合法的文件名称
+ */
+export function isValidFilename(filename: string): boolean {
+  // 定义非法字符
+  const invalidChars = /[<>:"\/\\|?*\x00-\x1F]/g
+  // 定义Windows保留名称
+  const reservedNames = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\..*)?$/i
+  // 检查文件名是否以点或空格结束（Windows限制）
+  const isTrailingDotOrSpace = /[\. ]$/
+
+  // 进行检查
+  return (
+    !invalidChars.test(filename) &&
+    !reservedNames.test(filename) &&
+    !isTrailingDotOrSpace.test(filename)
+  )
+}

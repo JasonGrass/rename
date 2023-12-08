@@ -4,12 +4,12 @@
     <el-menu default-active="0" @select="onMenuSelected">
 
       <el-menu-item v-for="(handler, index) of handlers" :index="index.toString()">
-
         <el-icon>
           <SetUp />
         </el-icon>
         <span>{{ handler.title }}</span>
-
+        <span class="dot" v-show="handler.enable">
+        </span>
       </el-menu-item>
 
       <!--
@@ -76,4 +76,16 @@ onMounted(() => {
 
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.dot {
+  position: relative;
+  top: -5px;
+  left: 3px;
+
+  width: 6px;
+  height: 6px;
+  border-radius: 8px;
+  background-color: #67C23A;
+
+}
+</style>

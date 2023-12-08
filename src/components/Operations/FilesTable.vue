@@ -16,7 +16,7 @@
       <vxe-column :visible="!isOnlyPreview" field="size" :formatter="sizeFormatter" title="大小" width="100" sortable
         align="center"></vxe-column>
       <vxe-column :visible="isShowFolder && !isOnlyPreview" field="folder" title="目录" sortable align="right"></vxe-column>
-      <vxe-column field="preview" title="预览" align="left"></vxe-column>
+      <vxe-column field="preview" title="预览" align="left" :class-name="previewCellClass"></vxe-column>
 
     </vxe-table>
 
@@ -31,7 +31,7 @@ import { useFileStore } from '@/store/files';
 import { storeToRefs } from "pinia";
 
 const fileStore = useFileStore()
-const { selectedCount, total, files, filteredFiles } = storeToRefs(fileStore)
+const { selectedCount, total, filteredFiles } = storeToRefs(fileStore)
 
 const sizeFormatter: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => {
   // {cellValue, column, row, rowIndex}
@@ -47,6 +47,14 @@ const timeFormater: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => 
 
 const isShowFolder = ref(false)
 const isOnlyPreview = ref(false)
+
+const previewCellClass = (args: any) => {
+  const row = args.row as FileItem
+  if (!row || row.isValidName === undefined) {
+    return ""
+  }
+  return row.isValidName ? "" : "invalid-filename"
+}
 
 </script>
 
@@ -65,3 +73,10 @@ const isOnlyPreview = ref(false)
   }
 }
 </style>
+
+<style>
+.invalid-filename {
+  color: #F56C6C
+}
+</style>
+

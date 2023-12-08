@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-checkbox v-model="enabled" label="启用规则" border></el-checkbox>
+    <el-checkbox class="enable-handler" v-model="enabled" label="启用规则" border></el-checkbox>
 
     <KeepAlive>
       <component :is="currentHandler?.component" @submit="onRenameHandlerSubmit"></component>
@@ -13,7 +13,7 @@
 import _ from 'lodash';
 
 import { useFileStore } from "@/store/files"
-import { getFilenameWithoutExtension, getExtension } from "@/utils/file"
+import { getFilenameWithoutExtension, getExtension, isValidFilename } from "@/utils/file"
 
 import HandlerFactory from '@/components/Handlers/HandlerFactory';
 import { storeToRefs } from 'pinia';
@@ -73,7 +73,9 @@ const rename = (options: any) => {
         handler.rename(ctx, undefined)
       }
     }
-    return ctx.name + ctx.extension
+    const newName = ctx.name + ctx.extension
+    file.isValidName = isValidFilename(newName)
+    return newName
   })
 
 }
@@ -84,4 +86,8 @@ const debounceRename = _.debounce((options) => {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped>
+.enable-handler {
+  margin: 4px 0 12px 0;
+}
+</style>

@@ -40,6 +40,11 @@ interface FileItem {
   preview: string = ""
 
   /**
+   * 修改之后的命名，是否为合法文件名
+  */
+  isValidName: boolean = true
+
+  /**
    * 是否被选择重命名
    */
   selected: boolean = true
