@@ -9,7 +9,7 @@ export const useFilterStore = defineStore("filters", () => {
       return
     }
 
-    if (filters.value.find((f) => f.prop === filter.prop && f.type === filter.type)) {
+    if (filters.value.find((f) => isSame(f, filter))) {
       throw Error(`重复添加条件：[${filter.type}] ${filter.prop}`)
     }
 
@@ -18,7 +18,7 @@ export const useFilterStore = defineStore("filters", () => {
 
   function removeFilter(filter: FileFilterItem) {
     filters.value = filters.value.filter((f) => {
-      if (f.prop === filter.prop && f.type === filter.type) {
+      if (isSame(f, filter)) {
         return false
       } else {
         return true
@@ -34,13 +34,17 @@ export const useFilterStore = defineStore("filters", () => {
     let excludeMatch = false
 
     if (includeFilters.length > 0) {
-      includeMatch = includeFilters.some((filter) => filter.match(file))
+      includeMatch = includeFilters.every((filter) => filter.match(file))
     }
     if (excludeFilters.length > 0) {
       excludeMatch = excludeFilters.some((filter) => filter.match(file))
     }
 
     return includeMatch && !excludeMatch
+  }
+
+  function isSame(f1: FileFilterItem, f2: FileFilterItem) {
+    return f1.prop === f2.prop && f1.type === f2.type && f1.predicate === f2.predicate
   }
 
   return { filters, addFilter, removeFilter, filter }
