@@ -10,22 +10,21 @@
 </template>
 
 <script lang="ts" setup>
-import _ from 'lodash';
-
 import { useFileStore } from "@/store/files"
-import { getFilenameWithoutExtension, getExtension, isValidFilename } from "@/utils/file"
+import { storeToRefs } from "pinia"
 
 import HandlerFactory from '@/components/Handlers/HandlerFactory';
-import { storeToRefs } from 'pinia';
-const handlers = HandlerFactory.handlers
+import { useRenameHandler } from './handler.flow';
 
+// 动态组件，根据当前选中的重命名操作，显示对应 UI
 const { currentHandler } = defineProps<{
   currentHandler?: IRenameHandler
 }>()
 
-const fileStore = useFileStore()
-const { filteredFiles } = storeToRefs(fileStore)
+const handlers = HandlerFactory.handlers
+const { debounceRename } = useRenameHandler()
 
+// 判断当前选中的重命名操作，是否可用
 const enabled = computed({
   get: () => {
     const h = handlers.find(h => h.active)
@@ -40,49 +39,17 @@ const enabled = computed({
   }
 })
 
+// 重命名操作的配置变更之后，重新计算文件名预览
 const onRenameHandlerSubmit = (options: any) => {
   debounceRename(options)
 }
 
+// 文件列表发生变化时，更新重命名预览
+const fileStore = useFileStore()
+const { filteredFiles } = storeToRefs(fileStore)
 watch(filteredFiles, () => {
   debounceRename(undefined)
 })
-
-const rename = (options: any) => {
-  const activeHandler = handlers.find(h => h.active)
-  if (activeHandler && options) {
-    activeHandler.setOptions(options)
-  }
-
-  fileStore.renamePreview((file) => {
-    const ctx = {
-      name: getFilenameWithoutExtension(file.name),
-      extension: getExtension(file.name),
-      file: file
-    }
-
-    for (const handler of handlers) {
-      if (!handler.enable) {
-        continue
-      }
-
-      if (handler.active) {
-        handler.rename(ctx, options)
-      }
-      else {
-        handler.rename(ctx, undefined)
-      }
-    }
-    const newName = ctx.name + ctx.extension
-    file.isValidName = isValidFilename(newName)
-    return newName
-  })
-
-}
-
-const debounceRename = _.debounce((options) => {
-  rename(options)
-}, 500)
 
 </script>
 
