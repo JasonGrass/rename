@@ -27,6 +27,7 @@ declare module 'vue' {
     FileFilterSelector: typeof import('./components/Operations/Filter/FileFilterSelector.vue')['default']
     FilesFilter: typeof import("./components/Operations/Filter/FilesFilter.vue")["default"]
     FilesTable: typeof import('./components/Operations/FilesTable.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
     HandlerContainer: typeof import('./components/Handlers/HandlerContainer.vue')['default']
     HandlerMenu: typeof import('./components/HandlerMenu.vue')['default']
     Header: typeof import('./components/Header.vue')['default']

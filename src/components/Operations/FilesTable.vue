@@ -3,7 +3,6 @@
     <div class="filters">
       <el-checkbox v-model="isShowFolder" label="显示目录" border />
       <el-checkbox v-model="isOnlyPreview" label="仅显示预览" border />
-      <span v-show="Boolean(total)">{{ selectedCount }} / {{ total }}</span>
     </div>
 
     <vxe-table :data="filteredFiles" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件">
@@ -31,7 +30,7 @@ import { useFileStore } from '@/store/files';
 import { storeToRefs } from "pinia";
 
 const fileStore = useFileStore()
-const { selectedCount, total, filteredFiles } = storeToRefs(fileStore)
+const { filteredFiles } = storeToRefs(fileStore)
 
 const sizeFormatter: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => {
   // {cellValue, column, row, rowIndex}
