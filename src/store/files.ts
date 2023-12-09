@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
-
 import { useFilterStore } from "./filters"
+import { calcHash } from "@/utils/file"
 
 export const useFileStore = defineStore("files", () => {
   const filterStore = useFilterStore()
@@ -22,6 +22,8 @@ export const useFileStore = defineStore("files", () => {
         same.name = item.name
         same.modifyTime = item.modifyTime
         same.size = item.size
+
+        // OPT store 中使用 UI
         ElMessage.warning(`文件已存在 \"${item.name}\"`)
       } else {
         files.value.push(item)
@@ -48,10 +50,7 @@ export const useFileStore = defineStore("files", () => {
       try {
         file.error = ""
         await file.handle.move(file.preview)
-        const nf = await file.handle.getFile()
-        file.name = nf.name
-        file.modifyTime = nf.lastModified
-        file.size = nf.size
+        await updateFile(file)
         success += 1
       } catch (e: any) {
         console.error("重命名失败", file.name, e)
@@ -63,5 +62,42 @@ export const useFileStore = defineStore("files", () => {
     return [success, fail]
   }
 
-  return { files, filteredFiles, selectedCount, total, addFiles, renamePreview, renameExecute }
+  async function refresh() {
+    const files: FileItem[] = filteredFiles.value
+    for (const file of files) {
+      try {
+        file.error = ""
+        await updateFile(file)
+      } catch (e: any) {
+        console.error("刷新失败", file.name, e)
+        const message = typeof e === "string" ? e : e instanceof Error ? e.message : `未知错误 ${e}`
+        // OPT store 中使用 UI
+        ElMessage.error(`文件 \"${file.name}\" 刷新失败. ${message}`)
+      }
+    }
+  }
+
+  async function updateFile(file: FileItem) {
+    const nf = await file.handle.getFile()
+    file.name = nf.name
+    file.modifyTime = nf.lastModified
+    file.size = nf.size
+    file.hash = calcHash(nf, file.folder)
+  }
+
+  function clear() {
+    files.value = []
+  }
+
+  return {
+    files,
+    filteredFiles,
+    selectedCount,
+    total,
+    addFiles,
+    renamePreview,
+    renameExecute,
+    refresh,
+    clear
+  }
 })
