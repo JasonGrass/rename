@@ -39,6 +39,11 @@ export const useFileStore = defineStore("files", () => {
 
   async function renameExecute() {
     const files: FileItem[] = filteredFiles.value
+
+    if (files.length === 0) {
+      return [0, 0]
+    }
+
     const invalidName = files.find((f) => !f.isValidName)
     if (invalidName) {
       throw new Error("重命名拒绝执行，存在非法文件名称")
