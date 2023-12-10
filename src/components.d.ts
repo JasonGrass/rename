@@ -7,7 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ActionContainer: typeof import('./components/Operations/ActionContainer.vue')['default']
+    ActionContainer: typeof import('./components/Operations/Action/ActionContainer.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -27,14 +27,14 @@ declare module 'vue' {
     FileFilter: typeof import('./components/Operations/Filter/FileFilter.vue')['default']
     FileFilterSelector: typeof import('./components/Operations/Filter/FileFilterSelector.vue')['default']
     FilesFilter: typeof import("./components/Operations/Filter/FilesFilter.vue")["default"]
-    FilesTable: typeof import('./components/Operations/FilesTable.vue')['default']
+    FilesTable: typeof import('./components/Operations/TableView/FilesTable.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
-    HandlerContainer: typeof import('./components/Handlers/HandlerContainer.vue')['default']
+    HandlerContainer: typeof import('./components/Operations/Handlers/HandlerContainer.vue')['default']
     HandlerMenu: typeof import('./components/HandlerMenu.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
     InsertConfiguration: typeof import('./components/Handlers/insert/InsertConfiguration.vue')['default']
-    Operations: typeof import('./components/Operations.vue')['default']
-    OperationWrapper: typeof import('./components/OperationWrapper.vue')['default']
+    Operations: typeof import('./components/Operations/Operations.vue')['default']
+    OperationWrapper: typeof import('./components/Operations/OperationWrapper.vue')['default']
     ReplaceConfiguration: typeof import('./components/Handlers/replace/ReplaceConfiguration.vue')['default']
   }
 }

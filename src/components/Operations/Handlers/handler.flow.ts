@@ -3,7 +3,7 @@ import _ from "lodash"
 import { useFileStore } from "@/store/files"
 
 import { getFilenameWithoutExtension, getExtension, isValidFilename } from "@/utils/file"
-import HandlerFactory from "@/components/Handlers/HandlerFactory"
+import HandlerFactory from "./HandlerFactory"
 
 /**
  * 文件重命名处理流程

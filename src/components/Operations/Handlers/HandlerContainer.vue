@@ -13,7 +13,7 @@
 import { useFileStore } from "@/store/files"
 import { storeToRefs } from "pinia"
 
-import HandlerFactory from '@/components/Handlers/HandlerFactory';
+import HandlerFactory from './HandlerFactory';
 import { useRenameHandler } from './handler.flow';
 
 // 动态组件，根据当前选中的重命名操作，显示对应 UI

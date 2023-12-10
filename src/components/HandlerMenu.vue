@@ -57,7 +57,7 @@
 
 <script lang="ts" setup>
 import { SetUp } from '@element-plus/icons-vue';
-import HandlerFactory from '@/components/Handlers/HandlerFactory';
+import HandlerFactory from '@/components/Operations/Handlers/HandlerFactory';
 
 const handlers = HandlerFactory.handlers
 
