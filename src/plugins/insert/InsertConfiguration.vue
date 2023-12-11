@@ -6,9 +6,9 @@
         <el-option v-for="item in positionOptions" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
       <el-input-number v-show='position === "afterIndexN" || position === "beforeIndexN"' style="width: 220px;"
-        v-model="postionIndex" :min="0" placeholder="指定 N 的取值"></el-input-number>
+        v-model="postionIndex" :min="0" placeholder="设置 N 的取值"></el-input-number>
       <el-input v-show='position === "afterStr" || position === "beforeStr"' style="width: 360px;" v-model="postionStr"
-        placeholder="指定字符串 XX 的取值"></el-input>
+        placeholder="设置字符串 XX 的取值"></el-input>
     </div>
 
     <div style="margin:12px 0">
