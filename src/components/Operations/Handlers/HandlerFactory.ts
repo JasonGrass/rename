@@ -6,8 +6,9 @@
 import { reactive } from "vue"
 
 import InsertHandler from "@/plugins/insert/InsertHandler.ts"
+import RegexHandler from "@/plugins/regex/RegexHandler.ts"
 import ReplaceHandler from "@/plugins/replace/ReplaceHandler.ts"
 
 export default reactive({
-  handlers: [InsertHandler, ReplaceHandler]
+  handlers: [InsertHandler, RegexHandler, ReplaceHandler]
 })

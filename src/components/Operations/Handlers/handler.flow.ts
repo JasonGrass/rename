@@ -33,12 +33,16 @@ export function useRenameHandler() {
           continue
         }
 
-        if (handler.active) {
-          // 当前选中的操作规则，则按照最新的配置执行
-          handler.rename(ctx, options)
-        } else {
-          // 其它规则，则按照缓存的规则配置执行
-          handler.rename(ctx, undefined)
+        try {
+          if (handler.active) {
+            // 当前选中的操作规则，则按照最新的配置执行
+            handler.rename(ctx, options)
+          } else {
+            // 其它规则，则按照缓存的规则配置执行
+            handler.rename(ctx, undefined)
+          }
+        } catch (error: any) {
+          console.error(`执行 "${handler.title}" 出错`, error)
         }
       }
 
