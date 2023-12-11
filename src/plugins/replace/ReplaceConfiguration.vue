@@ -4,14 +4,14 @@
       <el-option v-for="item in positionOptions" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
 
-    <el-input-number v-show='["someCharAfterIndexM", "someCharBeforeIndexM"].includes(position)' style="width: 220px;"
+    <el-input-number v-show='["nCharAfterIndexM", "nCharBeforeIndexM"].includes(position)' style="width: 220px;"
       v-model="postionIndex" :min="0" placeholder="设置 M 的取值"></el-input-number>
 
-    <el-input v-show='["string", "allAfterStr", "allBeforeStr", "someAfterStr", "someBeforeStr"].includes(position)'
+    <el-input v-show='["string", "allAfterStr", "allBeforeStr", "nAfterStr", "nBeforeStr"].includes(position)'
       style="width: 360px;" v-model="postionStr" placeholder="设置字符串 XX 的取值"></el-input>
 
     <el-input-number
-      v-show='["frontN", "behindN", "someCharAfterIndexM", "someCharBeforeIndexM", "someAfterStr", "someBeforeStr"].includes(position)'
+      v-show='["frontN", "behindN", "nCharAfterIndexM", "nCharBeforeIndexM", "nAfterStr", "nBeforeStr"].includes(position)'
       style="width: 220px;" v-model="strLengh" :min="0" placeholder="设置 N 的取值"></el-input-number>
   </div>
   <el-input class="insert-text" v-model="insertText" placeholder="新字符串（如果是删除，则这里留空）"></el-input>
