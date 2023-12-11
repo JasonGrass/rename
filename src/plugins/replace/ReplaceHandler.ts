@@ -11,7 +11,7 @@ interface IReplaceHandlerOptions {
 class Handler implements IRenameHandler {
   private _options: IReplaceHandlerOptions | null = null
 
-  public title: string = "替换字符"
+  public title: string = "删除/替换字符"
   public active: boolean = false
   public enable: boolean = false
   public component: Component = markRaw(ReplaceConfiguration)
