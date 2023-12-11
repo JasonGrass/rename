@@ -13,7 +13,7 @@ class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRename
   public component: Component = markRaw(RegexConfiguration)
   public sortHint = 3
 
-  doRename(ctx: IRenameContext, options: IRegexHandlerOptions) {
+  protected doRename(ctx: IRenameContext, options: IRegexHandlerOptions) {
     if (!options.pattern) {
       return
     }
@@ -24,7 +24,9 @@ class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRename
     }
     let flag = flags[1] // 提取标志
     let regex = new RegExp(pattern, flag)
-    ctx.name = ctx.name.replace(regex, options.to)
+
+    let fileName = this.getFileName(ctx).replace(regex, options.to)
+    this.setFileName(ctx, fileName)
   }
 }
 
