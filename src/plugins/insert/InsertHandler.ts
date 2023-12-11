@@ -13,6 +13,7 @@ class Handler implements IRenameHandler {
   public title: string = "新增/插入字符"
   public active: boolean = false
   public enable: boolean = false
+  public containExt: boolean = false
   public component: Component = markRaw(InsertConfiguration)
 
   public rename(ctx: IRenameContext, options?: IInsertHandlerOptions) {

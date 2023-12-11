@@ -14,6 +14,7 @@ class Handler implements IRenameHandler {
   public title: string = "删除/替换字符"
   public active: boolean = false
   public enable: boolean = false
+  public containExt: boolean = false
   public component: Component = markRaw(ReplaceConfiguration)
 
   public rename(ctx: IRenameContext, options?: IReplaceHandlerOptions) {

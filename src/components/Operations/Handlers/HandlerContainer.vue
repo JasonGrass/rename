@@ -1,6 +1,13 @@
 <template>
   <div>
-    <el-checkbox class="enable-handler" v-model="enabled" label="启用规则" border></el-checkbox>
+
+    <div class="handler-settings">
+      <el-checkbox v-model="enabled" label="启用规则" border></el-checkbox>
+      <el-tooltip content="默认情况下，只处理不包含后缀名的文件名部分" placement="top">
+        <el-checkbox v-model="containExt" label="同时处理后缀名" border></el-checkbox>
+      </el-tooltip>
+
+    </div>
 
     <KeepAlive>
       <component :is="currentHandler?.component" @submit="onRenameHandlerSubmit"></component>
@@ -39,6 +46,21 @@ const enabled = computed({
   }
 })
 
+// 判断当前选中的重命名操作，是否合并处理后缀名
+const containExt = computed({
+  get: () => {
+    const h = handlers.find(h => h.active)
+    return h?.containExt ?? false
+  },
+  set: (v) => {
+    const h = handlers.find(h => h.active)
+    if (h) {
+      h.containExt = v
+    }
+    debounceRename(undefined)
+  }
+})
+
 // 重命名操作的配置变更之后，重新计算文件名预览
 const onRenameHandlerSubmit = (options: any) => {
   debounceRename(options)
@@ -54,7 +76,12 @@ watch(filteredFiles, () => {
 </script>
 
 <style lang="less" scoped>
-.enable-handler {
+.handler-settings {
   margin: 4px 0 12px 0;
+
+  &>label {
+    margin-right: 12px;
+  }
+
 }
 </style>
