@@ -21,11 +21,9 @@ function handlerPluginDetector() {
  * 此段代码在编译前自动生成，请勿修改。
  * 功能：自动检测 src/plugins 目录下的 Handler 文件，并将其导入到 HandlerFactory.ts 文件中。实现 plugins 的自动发现。
  */
-
-import { reactive } from "vue"
 ${code}`
 
-      const filePath = path.resolve(srcPath, "components/Operations/Handlers/", "HandlerFactory.ts")
+      const filePath = path.resolve(srcPath, "lib/handler/", "HandlerAutoExport.ts")
 
       await fs.writeFile(filePath, code, "utf8")
       console.log("HandlerFactory.ts was generated!")
@@ -69,9 +67,7 @@ async function generateImportCode(pluginsDir) {
 
   return `
 ${importCode}
-export default reactive({
-  handlers: [${arrayCode}]
-})
+export default [${arrayCode}]
 `
 }
 

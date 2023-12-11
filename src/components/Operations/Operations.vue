@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import HandlerFactory from '@/components/Operations/Handlers/HandlerFactory';
+import HandlerFactory from '@/lib/handler/HandlerFactory';
 const handlers = HandlerFactory.handlers
 
 const currentHandler = ref<IRenameHandler>()
