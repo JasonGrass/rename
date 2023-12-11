@@ -6,7 +6,16 @@ import _ from "lodash"
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
 
 interface IInsertHandlerOptions {
-  to: string
+  position: "begin" | "end" | "afterIndexN" | "beforeIndexN" | "afterStr" | "beforeStr"
+  n: number
+  from: string
+  toType: "text" | "index"
+  toStr: string
+  toPreStr: string
+  toAfterStr: string
+  toBaseNumber: number
+  toNumberType: "digit" | "lowerChinese" | "upperChinese" | "lowerChar" | "upperChar"
+  toDigitPadding: number
 }
 
 class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenameHandler {
@@ -15,10 +24,7 @@ class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenam
   public sortHint = 2
 
   doRename(ctx: IRenameContext, options: IInsertHandlerOptions) {
-    const newName = ctx.name.concat(options.to)
-
-    console.log("insert", ctx.name, options.to, newName)
-
+    const newName = ctx.name.concat(options.toStr)
     ctx.name = newName
   }
 }

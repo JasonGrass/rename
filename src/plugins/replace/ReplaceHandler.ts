@@ -6,6 +6,18 @@ import _ from "lodash"
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
 
 interface IReplaceHandlerOptions {
+  position:
+    | "string"
+    | "frontN"
+    | "behindN"
+    | "nCharAfterIndexM"
+    | "nCharBeforeIndexM"
+    | "allAfterStr"
+    | "allBeforeStr"
+    | "nAfterStr"
+    | "nBeforeStr"
+  m: number
+  n: number
   from: string
   to: string
 }

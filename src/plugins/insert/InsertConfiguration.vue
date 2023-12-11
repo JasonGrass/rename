@@ -89,10 +89,7 @@ const position = ref("")
 const postionIndex = ref()
 const postionStr = ref("")
 
-
 const intertContentType = ref("text")
-
-
 
 const insertText = ref("")
 const insertIndexPreText = ref("")
@@ -105,7 +102,16 @@ const emits = defineEmits(["submit"])
 
 watchEffect(() => {
   const options = {
-    to: insertText.value
+    position: position.value,
+    n: postionIndex.value,
+    from: postionStr.value,
+    toType: intertContentType.value,
+    toStr: insertText.value,
+    toPreStr: insertIndexPreText.value,
+    toAfterStr: insertIndexAfterText.value,
+    toBaseNumber: insertIndexBaseNumber.value,
+    toNumberType: insertIndexNumberType.value,
+    toDigitPadding: insertIndexDigitPadding.value
   }
   emits("submit", options)
 })

@@ -7,13 +7,12 @@
     <el-input-number v-show='["someCharAfterIndexM", "someCharBeforeIndexM"].includes(position)' style="width: 220px;"
       v-model="postionIndex" :min="0" placeholder="设置 M 的取值"></el-input-number>
 
-    <el-input-number
-      v-show='["frontN", "behindN", "someCharAfterIndexM", "someCharBeforeIndexM", "someAfterStr", "someBeforeStr"].includes(position)'
-      style="width: 220px;" v-model="postionIndex" :min="0" placeholder="设置 N 的取值"></el-input-number>
-
     <el-input v-show='["string", "allAfterStr", "allBeforeStr", "someAfterStr", "someBeforeStr"].includes(position)'
       style="width: 360px;" v-model="postionStr" placeholder="设置字符串 XX 的取值"></el-input>
 
+    <el-input-number
+      v-show='["frontN", "behindN", "someCharAfterIndexM", "someCharBeforeIndexM", "someAfterStr", "someBeforeStr"].includes(position)'
+      style="width: 220px;" v-model="strLengh" :min="0" placeholder="设置 N 的取值"></el-input-number>
   </div>
   <el-input class="insert-text" v-model="insertText" placeholder="新字符串（如果是删除，则这里留空）"></el-input>
 </template>
@@ -31,10 +30,10 @@ const positionOptions = [{
   value: "behindN"
 }, {
   label: "第 M 位置后的 N 个字符",
-  value: "someCharAfterIndexM"
+  value: "nCharAfterIndexM"
 }, {
   label: "倒数 M 位置前的 N 个字符",
-  value: "someCharBeforeIndexM"
+  value: "nCharBeforeIndexM"
 },
 {
   label: "XX 字符串后面的所有字符",
@@ -45,30 +44,28 @@ const positionOptions = [{
   value: "allBeforeStr"
 }, {
   label: "XX 字符串后面的 N 个字符",
-  value: "someAfterStr"
+  value: "nAfterStr"
 },
 {
   label: "XX 字符串前面的 N 个字符",
-  value: "someBeforeStr"
+  value: "nBeforeStr"
 }]
-
-
 
 const position = ref("")
 const postionIndex = ref()
+const strLengh = ref()
 const postionStr = ref("")
-
 const insertText = ref("")
-
-const replacedStr = ref("")
-const newStr = ref("")
 
 const emits = defineEmits(["submit"])
 
 watchEffect(() => {
   const options = {
-    from: replacedStr.value,
-    to: newStr.value
+    position: position.value,
+    m: postionIndex.value,
+    n: strLengh.value,
+    from: postionStr.value,
+    to: insertText.value
   }
   emits("submit", options)
 })
