@@ -12,6 +12,7 @@ interface IInsertHandlerOptions {
 class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenameHandler {
   public title: string = "新增/插入字符"
   public component: Component = markRaw(InsertConfiguration)
+  public sortHint = 2
 
   doRename(ctx: IRenameContext, options: IInsertHandlerOptions) {
     const newName = ctx.name.concat(options.to)

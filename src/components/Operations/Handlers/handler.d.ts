@@ -25,6 +25,11 @@ interface IRenameHandler {
   component: Component
 
   /**
+   * 排序参考
+   */
+  sortHint: number
+
+  /**
    * 执行 rename 操作
    * @param ctx rename 上下文
    * @param options Handler 参数配置，如果为空则使用缓存的配置

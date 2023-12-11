@@ -13,6 +13,7 @@ interface IReplaceHandlerOptions {
 class Handler extends RenameHandlerBase<IReplaceHandlerOptions> implements IRenameHandler {
   public title: string = "删除/替换字符"
   public component: Component = markRaw(ReplaceConfiguration)
+  public sortHint = 1
 
   doRename(ctx: IRenameContext, options: IReplaceHandlerOptions) {
     const newName = ctx.name.replaceAll(options.from, options.to)
