@@ -9,7 +9,7 @@
     </el-popconfirm>
 
     <el-button @click="onRefresh">刷新</el-button>
-    <el-button @click="onHelp">帮助</el-button>
+    <!-- <el-button @click="onHelp">帮助</el-button> -->
   </div>
 </template>
 
@@ -53,10 +53,6 @@ const onRefresh = async () => {
 
   await fileStore.refresh()
   ElMessage.success("刷新完成");
-}
-
-const onHelp = () => {
-
 }
 
 </script>

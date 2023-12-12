@@ -12,8 +12,7 @@
     </span>
 
     <span class="about">
-      <el-button>关于</el-button>
-      <img src="../assets/github.svg" alt="github" width="32" />
+      <img src="../assets/github.svg" alt="github" width="32" @click="onGithubClick" />
     </span>
 
   </div>
@@ -35,6 +34,10 @@ const importFile = async () => {
 const importFolder = async () => {
   const files = await fileUtils.importFolder();
   store.addFiles(files)
+}
+
+const onGithubClick = () => {
+  globalThis.open("https://github.com/JasonGrass/rename", "_blank", "noreferrer")
 }
 
 </script>
