@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
 import { useFilterStore } from "./filters"
 import { calcHash } from "@/utils/file"
+import { ElNotification } from "element-plus"
 
 export const useFileStore = defineStore("files", () => {
   const filterStore = useFilterStore()
@@ -10,6 +11,11 @@ export const useFileStore = defineStore("files", () => {
 
   const total = computed(() => files.value.length)
   const selectedCount = computed(() => filteredFiles.value.length)
+
+  const waitRenameCount = ref(0)
+  const successRenameCount = ref(0)
+  const failRenameCount = ref(0)
+  const renameWorkingFile = ref()
 
   function addFiles(items: FileItem[]) {
     if (items.length === 0) {
@@ -49,24 +55,32 @@ export const useFileStore = defineStore("files", () => {
       throw new Error("重命名拒绝执行，存在非法文件名称")
     }
 
-    let success = 0
-    let fail = 0
+    waitRenameCount.value = files.length
     for (const file of files) {
       try {
         file.error = ""
+        renameWorkingFile.value = file
         await file.handle.move(file.preview)
         await updateFile(file)
-        success += 1
+        successRenameCount.value += 1
+        waitRenameCount.value -= 1
       } catch (e: any) {
         console.log("重命名失败", file.name)
         console.error(e)
         console.table(e)
         file.error = typeof e === "string" ? e : e instanceof Error ? e.message : `未知错误 ${e}`
-        fail += 1
+        failRenameCount.value += 1
+        waitRenameCount.value -= 1
+        ElNotification({
+          title: "重命名失败",
+          message: `${file.name} 重命名失败. ${file.error}`,
+          type: "error",
+          duration: 0
+        })
       }
     }
 
-    return [success, fail]
+    return [successRenameCount.value, failRenameCount.value]
   }
 
   /**
@@ -119,6 +133,10 @@ export const useFileStore = defineStore("files", () => {
     filteredFiles,
     selectedCount,
     total,
+    waitRenameCount,
+    successRenameCount,
+    failRenameCount,
+    renameWorkingFile,
     addFiles,
     renamePreview,
     renameExecute,
