@@ -11,6 +11,7 @@
     "lib": ["ES2020", "ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "types": ["element-plus/global", "node"],
+    "allowJs": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

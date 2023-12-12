@@ -106,6 +106,7 @@ function buildFile(
     handle,
     isValidName: false,
     error: "",
+    index: 0,
     hash: calcHash(file, folder)
   }
 }
