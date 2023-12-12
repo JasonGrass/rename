@@ -30,3 +30,9 @@
 因为使用了实验性的 API，浏览器兼容会有问题。如果发现功能有问题，请使用最新版 Edge/Chrome 浏览器。
 
 ["showOpenFilePicker" | Can I use...](https://caniuse.com/?search=showOpenFilePicker )
+
+## 已知问题
+
+对文件进行重命名的核心方法，是 `FileSystemFileHandle::move()` 这个方法，目前还没有 MDN 文档。
+
+从测试结果来看，此方法采用的应该是复制拷贝的方案，在重命名大文件时，操作非常慢。
