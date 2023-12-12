@@ -4,6 +4,8 @@
 
 ## 批量重命名工具
 
+<https://rename-tool.vercel.app/>
+
 提供常用的文件批量重命名操作，无需下载安装，即用即走。部分 UI 设计参考了 utools 中的批量重命名插件。
 
 ## 实现原理与隐私问题
@@ -13,8 +15,9 @@
 所有数据只保留在本地浏览器中，不会上传服务器（这个工具不需要也没有服务器）。
 
 具体用到的浏览器 API 如下：
-[Window：showOpenFilePicker() 方法 - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/showOpenFilePicker )
-[Window：showDirectoryPicker() 方法 - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/showDirectoryPicker )
+
+[Window：showOpenFilePicker() 方法 - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/showOpenFilePicker )  
+[Window：showDirectoryPicker() 方法 - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/showDirectoryPicker )  
 [FileSystemFileHandle - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/FileSystemFileHandle )
 
 ## 缘起
