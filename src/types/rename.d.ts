@@ -64,4 +64,9 @@ interface FileItem {
   */
   error: string
 
+  /**
+   * 排序索引（排序结果）
+  */
+  index: number
+
 }

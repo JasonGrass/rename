@@ -67,6 +67,9 @@ export const useFileStore = defineStore("files", () => {
     return [success, fail]
   }
 
+  /**
+   * 从磁盘读取刷新文件信息
+   */
   async function refresh() {
     const files: FileItem[] = filteredFiles.value
     for (const file of files) {
@@ -90,8 +93,22 @@ export const useFileStore = defineStore("files", () => {
     file.hash = calcHash(nf, file.folder)
   }
 
+  /**
+   * 清空文件记录
+   */
   function clear() {
     files.value = []
+  }
+
+  /**
+   * 更新排序索引
+   */
+  function updateIndex(file: FileItem) {
+    const files: FileItem[] = filteredFiles.value
+    const one = files.find((f) => f.hash === file.hash)
+    if (one) {
+      one.index = file.index
+    }
   }
 
   return {
@@ -103,6 +120,7 @@ export const useFileStore = defineStore("files", () => {
     renamePreview,
     renameExecute,
     refresh,
-    clear
+    clear,
+    updateIndex
   }
 })

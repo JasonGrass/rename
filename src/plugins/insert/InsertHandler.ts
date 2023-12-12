@@ -16,6 +16,7 @@ interface IInsertHandlerOptions {
   toBaseNumber: number
   toNumberType: "digit" | "lowerChinese" | "upperChinese" | "lowerChar" | "upperChar"
   toDigitPadding: number
+  index: number
 }
 
 class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenameHandler {
@@ -29,6 +30,9 @@ class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenam
     options.n = options.n ?? 0
     options.toBaseNumber = options.toBaseNumber ?? 1
     options.toDigitPadding = options.toDigitPadding ?? 1
+    options.toPreStr = options.toPreStr ?? ""
+    options.toAfterStr = options.toAfterStr ?? ""
+    options.index = ctx.file.index
 
     switch (options.position) {
       case "begin":
@@ -124,25 +128,23 @@ function buildInsertContent(options: IInsertHandlerOptions) {
 }
 
 function buildNumberIndex(options: IInsertHandlerOptions) {
-  return "0"
-
-  // let numberIndex = ""
-  // switch (options.toNumberType) {
-  //   case "digit":
-  //     numberIndex = _.padStart(options.toBaseNumber.toString(), options.toDigitPadding, "0")
-  //     break
-  //   case "lowerChinese":
-  //     numberIndex = options.toBaseNumber
-  //     break
-  //   case "upperChinese":
-  //     numberIndex = options.toBaseNumber
-  //     break
-  //   case "lowerChar":
-  //     numberIndex = options.toBaseNumber
-  //     break
-  //   case "upperChar":
-  //     numberIndex = options.toBaseNumber
-  //     break
-  // }
-  // return numberIndex
+  let indexStr = ""
+  switch (options.toNumberType) {
+    case "digit":
+      indexStr = _.padStart(options.index + options.toBaseNumber, options.toDigitPadding, "0")
+      break
+    case "lowerChinese":
+      indexStr = "一"
+      break
+    case "upperChinese":
+      indexStr = "壹"
+      break
+    case "lowerChar":
+      indexStr = "a"
+      break
+    case "upperChar":
+      indexStr = "A"
+      break
+  }
+  return indexStr
 }
