@@ -8,7 +8,7 @@
     <vxe-table :data="data" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件"
       @sort-change="onSortChange">
       <vxe-column type="seq" title="序号" width="60" align="center"></vxe-column>
-      <vxe-column field="name" title="文件名" sortable align="left"></vxe-column>
+      <vxe-column field="name" class-name="text-pre" title="文件名" sortable align="left"></vxe-column>
       <!-- <vxe-column field="index" title="index" sortable align="left"></vxe-column> -->
       <vxe-column :visible="!isOnlyPreview" field="modifyTime" :formatter="timeFormater" title="修改时间" width="180" sortable
         align="center"></vxe-column>
@@ -63,7 +63,7 @@ const previewCellClass = (args: any) => {
   if (!row || row.isValidName === undefined) {
     return ""
   }
-  return row.isValidName ? "" : "invalid-filename"
+  return row.isValidName ? "text-pre" : "invalid-filename text-pre"
 }
 
 const onSortChange = (args: any) => {
@@ -98,6 +98,12 @@ const onSortChange = (args: any) => {
 <style>
 .invalid-filename {
   color: #F56C6C
+}
+
+.text-pre {
+  .vxe-cell--label {
+    white-space: pre
+  }
 }
 </style>
 

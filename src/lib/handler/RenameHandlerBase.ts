@@ -45,10 +45,10 @@ export default abstract class RenameHandlerBase<T> implements Partial<IRenameHan
    */
   protected setFileName(ctx: IRenameContext, fileName: string) {
     if (this.containExt) {
-      ctx.name = getFilenameWithoutExtension(fileName)
-      ctx.extension = getExtension(fileName)
+      ctx.name = getFilenameWithoutExtension(fileName).trim()
+      ctx.extension = getExtension(fileName).trim()
     } else {
-      ctx.name = fileName
+      ctx.name = fileName.trim()
     }
     return ctx
   }

@@ -58,7 +58,9 @@ export const useFileStore = defineStore("files", () => {
         await updateFile(file)
         success += 1
       } catch (e: any) {
-        console.error("重命名失败", file.name, e)
+        console.log("重命名失败", file.name)
+        console.error(e)
+        console.table(e)
         file.error = typeof e === "string" ? e : e instanceof Error ? e.message : `未知错误 ${e}`
         fail += 1
       }
@@ -77,7 +79,8 @@ export const useFileStore = defineStore("files", () => {
         file.error = ""
         await updateFile(file)
       } catch (e: any) {
-        console.error("刷新失败", file.name, e)
+        console.log("刷新失败", file.name)
+        console.error(e)
         const message = typeof e === "string" ? e : e instanceof Error ? e.message : `未知错误 ${e}`
         // OPT store 中使用 UI
         ElMessage.error(`文件 \"${file.name}\" 刷新失败. ${message}`)
