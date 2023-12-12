@@ -4,6 +4,7 @@
 
 ## 批量重命名工具
 
+<https://rename.jgrass.xyz/>  
 <https://rename-tool.vercel.app/>
 
 提供常用的文件批量重命名操作，无需下载安装，即用即走。部分 UI 设计参考了 utools 中的批量重命名插件。
@@ -23,3 +24,9 @@
 ## 缘起
 
 批量重命名是一个低频但时不时又会遇到的需求，为此专门下载一个软件过于大费周章。都 3202 年了，应该可以用 web 来做了吧。果然发现了相关的 API，于是有了这个在线工具。
+
+## 浏览器兼容问题
+
+因为使用了实验性的 API，浏览器兼容会有问题。如果发现功能有问题，请使用最新版 Edge/Chrome 浏览器。
+
+["showOpenFilePicker" | Can I use...](https://caniuse.com/?search=showOpenFilePicker )
