@@ -5,6 +5,8 @@ import _ from "lodash"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
 
+import xNumber from "./xNumber.js"
+
 interface IInsertHandlerOptions {
   position: "begin" | "end" | "afterIndexN" | "beforeIndexN" | "afterStr" | "beforeStr"
   n: number
@@ -128,23 +130,60 @@ function buildInsertContent(options: IInsertHandlerOptions) {
 }
 
 function buildNumberIndex(options: IInsertHandlerOptions) {
+  const index = options.index + options.toBaseNumber
   let indexStr = ""
   switch (options.toNumberType) {
     case "digit":
-      indexStr = _.padStart(options.index + options.toBaseNumber, options.toDigitPadding, "0")
+      indexStr = _.padStart(index.toString(), options.toDigitPadding, "0")
       break
     case "lowerChinese":
-      indexStr = "一"
+      indexStr = number2chinese1(index)
       break
     case "upperChinese":
-      indexStr = "壹"
+      indexStr = number2chinese2(index)
       break
     case "lowerChar":
-      indexStr = "a"
+      indexStr = number2EnglishChar1(index)
       break
     case "upperChar":
-      indexStr = "A"
+      indexStr = number2EnglishChar2(index)
       break
   }
   return indexStr
+}
+
+function number2chinese1(index: number) {
+  const n = xNumber.numberAri2Chn(Math.abs(index))
+  if (index >= 0) {
+    return n
+  }
+  return "负" + n
+}
+
+function number2chinese2(index: number) {
+  const n = xNumber.numberChnToBig(xNumber.numberAri2Chn(Math.abs(index)))
+  if (index >= 0) {
+    return n
+  }
+  return "負" + n
+}
+
+function number2EnglishChar1(num: number) {
+  let str = number2EnglishChar2(num)
+  return str.toLowerCase()
+}
+
+function number2EnglishChar2(num: number) {
+  if (num < 0) {
+    return ""
+  }
+
+  let str = ""
+  while (num > 0) {
+    let remainder = (num - 1) % 26
+    str = String.fromCharCode(65 + remainder) + str
+    num = Math.floor((num - 1) / 26)
+  }
+
+  return str
 }
