@@ -6,7 +6,7 @@
     <span v-if="waitRenameCount > 0">正在等待重命名文件数: {{ waitRenameCount }} ;
       成功数量: {{ successRenameCount }} ;
       失败数量: {{ failRenameCount }} ;
-      当前正在重命名: {{ renameWorkingFile.name }}</span>
+      当前正在重命名: {{ renameWorkingFile?.name ?? "" }}</span>
 
   </div>
 </template>

@@ -56,6 +56,10 @@ export const useFileStore = defineStore("files", () => {
     }
 
     waitRenameCount.value = files.length
+    successRenameCount.value = 0
+    failRenameCount.value = 0
+    renameWorkingFile.value = undefined
+
     for (const file of files) {
       try {
         file.error = ""
