@@ -4,7 +4,7 @@ import { ElMessageBox } from 'element-plus'
 onMounted(() => {
   const f = globalThis.showOpenFilePicker
   if (typeof f !== "function") {
-    ElMessageBox.alert('当前浏览器尚不支持次功能，请使用最新版本的 Edge 或 Chrome 浏览器', '浏览器不兼容', {
+    ElMessageBox.alert('当前浏览器尚未支持相关 API，请使用最新版本的 Edge 或 Chrome 浏览器', '浏览器不兼容', {
       confirmButtonText: 'OK',
     })
   }
