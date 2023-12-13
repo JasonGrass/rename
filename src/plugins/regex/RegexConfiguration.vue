@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <el-input style="max-width: 80vw;" v-model="pattern" placeholder="正则表达式（e.g. /abc/g ）"></el-input>
-    <el-input style="max-width: 80vw;" v-model="newStr" placeholder="新字符串"></el-input>
+    <el-input style="max-width: 80vw;" v-model="pattern" placeholder="search value, 正则表达式 (e.g. /abc/gi )"></el-input>
+    <el-input style="max-width: 80vw;" v-model="newStr" placeholder="replace value, 新字符串,可以使用反向引用"></el-input>
   </div>
 </template>
 
