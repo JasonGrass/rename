@@ -12,7 +12,7 @@
 
 使用的是浏览器加载文件的相关 API，读取本地文件名称信息（不读取文件内容），同样使用浏览器提供的 API 来修改文件名称。
 
-所有数据只保留在本地浏览器中，不会上传服务器（这个工具不需要也没有服务器）。
+所有数据只保留在本地浏览器内存中，关闭页面时清空，不会上传服务器（这个工具不需要也没有服务器）。
 
 具体用到的浏览器 API 如下：
 
@@ -30,6 +30,8 @@
 
 ["showOpenFilePicker" | Can I use...](https://caniuse.com/?search=showOpenFilePicker )
 
+[FileSystemFileHandle.move() for local files - Chrome Platform Status](https://chromestatus.com/feature/6271579653144576 )
+
 ## 🍉 已知问题
 
 对文件进行重命名的核心方法，是 `FileSystemFileHandle::move()` 这个方法，目前还没有 MDN 文档。
@@ -37,3 +39,11 @@
 从测试结果来看，此方法采用的似乎是复制拷贝的操作，在重命名大文件时，操作非常慢。详细信息见 [#1](https://github.com/JasonGrass/rename/issues/1)
 
 如果你有大量的大文件需要重命名，建议考虑本地批量重命名工具，如 utools 中的重命名插件。
+
+## 🍉 高级技巧
+
+提供的预设规则，无法满足一些个性化的需求，可以使用正则表达式替换完成一些高级功能。
+
+底层实现：`String.replace(pattern, replacement)` [String.prototype.replace() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace )
+
+可以参考这里的案例：[#2](https://github.com/JasonGrass/rename/discussions/2)
