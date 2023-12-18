@@ -3,7 +3,7 @@
 
     <span>文件数: {{ selectedCount }} / {{ total }} (过滤结果/导入总数)</span>
 
-    <span v-if="waitRenameCount > 0">正在等待重命名文件数: {{ waitRenameCount }} ;
+    <span class="working-file-span" v-if="waitRenameCount > 0">正在等待重命名文件数: {{ waitRenameCount }} ;
       成功数量: {{ successRenameCount }} ;
       失败数量: {{ failRenameCount }} ;
       当前正在重命名: {{ renameWorkingFile?.name ?? "" }}</span>
@@ -37,5 +37,13 @@ const { total, selectedCount, waitRenameCount, successRenameCount, failRenameCou
     margin-left: 24px;
   }
 
+}
+
+.working-file-span {
+  display: inline-block;
+  width: 800px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
