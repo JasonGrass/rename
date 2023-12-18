@@ -1,6 +1,6 @@
 interface FileItem {
   /**
-   * 文件名
+   * 文件名，包括扩展名
    */
   name: string
 

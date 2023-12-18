@@ -64,6 +64,10 @@ export const useFileStore = defineStore("files", () => {
       try {
         file.error = ""
         renameWorkingFile.value = file
+        if (file.name === file.preview) {
+          waitRenameCount.value -= 1
+          continue
+        }
         await file.handle.move(file.preview)
         await updateFile(file)
         successRenameCount.value += 1
