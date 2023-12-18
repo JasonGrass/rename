@@ -32,14 +32,6 @@
 
 [FileSystemFileHandle.move() for local files - Chrome Platform Status](https://chromestatus.com/feature/6271579653144576 )
 
-## 🍉 已知问题
-
-对文件进行重命名的核心方法，是 `FileSystemFileHandle::move()` 这个方法，目前还没有 MDN 文档。
-
-从测试结果来看，此方法采用的似乎是复制拷贝的操作，在重命名大文件时，操作非常慢。详细信息见 [#1](https://github.com/JasonGrass/rename/issues/1)
-
-如果你有大量的大文件需要重命名，建议考虑本地批量重命名工具，如 utools 中的重命名插件。
-
 ## 🍉 高级技巧
 
 提供的预设规则，无法满足一些个性化的需求，可以使用正则表达式替换完成一些高级功能。
