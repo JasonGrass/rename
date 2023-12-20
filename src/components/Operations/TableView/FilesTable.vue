@@ -80,12 +80,20 @@ const previewCellClass = (args: any) => {
 }
 
 const rowClass = (args: any) => {
-  const rowData = args.row as FileItem;
-  if (!rowData) {
+  const fileItem = args.row as FileItem;
+  if (!fileItem) {
     return ""
   }
-  if (rowData.name !== rowData.preview) {
-    return "row-name-changed"
+  const seq = args.seq as number; // 当前布局上的表格序号
+
+  if (fileItem.name !== fileItem.preview) {
+    // 相邻两行是否不同的颜色标记
+    if (seq % 2 === 1) {
+      return "row-name-changed-color-1"
+    }
+    else {
+      return "row-name-changed-color-2"
+    }
   }
   return ""
 }
@@ -130,8 +138,12 @@ const onSortChange = (args: any) => {
   }
 }
 
-tr.row-name-changed {
+tr.row-name-changed-color-1 {
   background-color: #d9ecff !important;
+}
+
+tr.row-name-changed-color-2 {
+  background-color: #c6e2ff !important;
 }
 </style>
 
