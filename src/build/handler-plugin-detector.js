@@ -11,9 +11,6 @@ function handlerPluginDetector() {
       const srcPath = path.resolve(__dirname, "../")
       const pluginPath = path.resolve(srcPath, "plugins")
 
-      console.log(srcPath)
-      console.log(pluginPath)
-
       const pluginFiles = await detectPlugins(pluginPath)
       let code = await generateImportCode(pluginFiles)
 
