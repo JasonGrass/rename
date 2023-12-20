@@ -17,13 +17,11 @@ class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRename
     if (!options.pattern) {
       return
     }
-    let pattern = options.pattern.replace(/^\/|\/\w*$/g, "") // 删除正则表达式字面量的斜杠和标志
-    let flags = options.pattern.match(/\/(\w*)$/)
-    if (!flags) {
+
+    const regex = buildRegExp(options.pattern)
+    if (regex == null) {
       return
     }
-    let flag = flags[1] // 提取标志
-    let regex = new RegExp(pattern, flag)
 
     let fileName = this.getFileName(ctx).replace(regex, options.to)
     this.setFileName(ctx, fileName)
@@ -31,3 +29,20 @@ class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRename
 }
 
 export default new Handler()
+
+function buildRegExp(input: string) {
+  // 如果是正则表达式字面量，/pattern/flag 这种格式的字符串
+  if (input.match(/^\/.*\/(\w*)$/g)) {
+    let pattern = input.replace(/^\/|\/\w*$/g, "") // 删除正则表达式字面量的斜杠和标志
+    let flags = input.match(/\/(\w*)$/)
+    if (!flags) {
+      return null
+    }
+    let flag = flags[1] // 提取标志
+    return new RegExp(pattern, flag)
+  }
+  // 如果是普通字符串，则直接识别为 pattern
+  else {
+    return new RegExp(input)
+  }
+}
