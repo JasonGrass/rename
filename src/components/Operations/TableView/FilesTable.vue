@@ -69,7 +69,7 @@ const timeFormater: VxeColumnPropTypes.Formatter<FileItem> = ({ cellValue }) => 
 }
 
 const isShowFolder = ref(false)
-const isOnlyPreview = ref(false)
+const isOnlyPreview = ref(true)
 
 const previewCellClass = (args: any) => {
   const row = args.row as FileItem
