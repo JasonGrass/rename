@@ -7,7 +7,7 @@
     </div>
 
     <vxe-table :data="data" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件"
-      @sort-change="onSortChange">
+      @sort-change="onSortChange" :row-class-name="rowClass">
       <vxe-column field="index" :formatter="indexFormatter" title="序号" width="60" align="center"></vxe-column>
       <vxe-column field="name" class-name="text-pre" title="文件名" sortable align="left"></vxe-column>
       <!-- <vxe-column field="index" title="index" sortable align="left"></vxe-column> -->
@@ -79,6 +79,17 @@ const previewCellClass = (args: any) => {
   return row.isValidName ? "text-pre" : "invalid-filename text-pre"
 }
 
+const rowClass = (args: any) => {
+  const rowData = args.row as FileItem;
+  if (!rowData) {
+    return ""
+  }
+  if (rowData.name !== rowData.preview) {
+    return "row-name-changed"
+  }
+  return ""
+}
+
 const onSortChange = (args: any) => {
   const table = args.$table;
   const visibleData = table.getTableData().visibleData // 排序结果
@@ -117,6 +128,10 @@ const onSortChange = (args: any) => {
   .vxe-cell--label {
     white-space: pre
   }
+}
+
+tr.row-name-changed {
+  background-color: #d9ecff !important;
 }
 </style>
 
