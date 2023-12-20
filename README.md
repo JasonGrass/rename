@@ -34,10 +34,10 @@
 
 ## 🍉 高级技巧
 
-提供的预设规则，无法满足一些个性化的需求，可以使用正则表达式替换完成一些高级功能。
+提供的预设规则，无法满足一些个性化的需求，可以使用正则表达式替换完成一些高级功能，或者直接编写 js 代码。🤣
 
-底层实现：`String.replace(pattern, replacement)` [String.prototype.replace() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace )
+正则替换底层实现：`String.replace(pattern, replacement)` [String.prototype.replace() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace )
 
 可以参考这里的案例：[#2](https://github.com/JasonGrass/rename/discussions/2)
 
-或者直接使用本地运行的重命名工具：[#3](https://github.com/JasonGrass/rename/discussions/3)
+或者直接使用本地运行的重命名工具，这里有一些网友的推荐：[#3](https://github.com/JasonGrass/rename/discussions/3)
