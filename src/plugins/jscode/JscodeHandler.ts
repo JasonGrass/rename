@@ -9,7 +9,7 @@ interface IJscodeConfiguration {
 class Handler extends RenameHandlerBase<IJscodeConfiguration> implements IRenameHandler {
   public title: string = "自定义 JS"
   public component: Component = markRaw(JscodeConfiguration)
-  public sortHint = 4
+  public sortHint = 101
 
   protected doRename(ctx: IRenameContext, options: IJscodeConfiguration) {
     if (!options.code) {

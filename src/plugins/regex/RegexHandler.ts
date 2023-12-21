@@ -11,7 +11,7 @@ interface IRegexHandlerOptions {
 class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRenameHandler {
   public title: string = "正则替换"
   public component: Component = markRaw(RegexConfiguration)
-  public sortHint = 3
+  public sortHint = 100
 
   protected doRename(ctx: IRenameContext, options: IRegexHandlerOptions) {
     if (!options.pattern) {
