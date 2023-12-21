@@ -23,6 +23,7 @@ declare module 'vue' {
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTag: typeof import('element-plus/es')['ElTag']
+    ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FileFilter: typeof import('./components/Operations/Filter/FileFilter.vue')['default']
     FileFilterSelector: typeof import('./components/Operations/Filter/FileFilterSelector.vue')['default']
