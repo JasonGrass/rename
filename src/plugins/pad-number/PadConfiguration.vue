@@ -2,10 +2,12 @@
   <div class="container">
     <div>
       <el-text>对第</el-text>
-      <el-input-number v-model="serial" :min="1" style="margin: 0 5px;"></el-input-number>
+      <el-input-number v-model="serial" :min="1" controls-position="right"
+        style="margin: 0 5px; width: 100px;"></el-input-number>
       <el-text>组数字进行补齐操作，</el-text>
       <el-text>目标长度为：</el-text>
-      <el-input-number v-model="length" :min="1" :max="9"></el-input-number>
+      <el-input-number v-model="length" :min="1" :max="9" controls-position="right"
+        style="width: 100px;"></el-input-number>
     </div>
     <div class="pad-string">
       <el-text>填充字符：</el-text>
