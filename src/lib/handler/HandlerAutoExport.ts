@@ -5,8 +5,9 @@
 
 import InsertHandler from "@/plugins/insert/InsertHandler.ts"
 import JscodeHandler from "@/plugins/jscode/JscodeHandler.ts"
+import NewHandler from "@/plugins/new/NewHandler.ts"
 import PadHandler from "@/plugins/pad-number/PadHandler.ts"
 import RegexHandler from "@/plugins/regex/RegexHandler.ts"
 import ReplaceHandler from "@/plugins/replace/ReplaceHandler.ts"
 
-export default [InsertHandler, JscodeHandler, PadHandler, RegexHandler, ReplaceHandler]
+export default [InsertHandler, JscodeHandler, NewHandler, PadHandler, RegexHandler, ReplaceHandler]

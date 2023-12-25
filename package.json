@@ -11,11 +11,13 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
     "@element-plus/icons-vue": "^2.3.1",
+    "dayjs": "^1.11.10",
     "element-plus": "^2.4.3",
     "js-md5": "^0.8.3",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "thememirror": "^2.0.1",
+    "uuid": "^9.0.1",
     "vue": "^3.2.47",
     "vue-codemirror": "^6.1.1",
     "vxe-table": "^4.5.14",
