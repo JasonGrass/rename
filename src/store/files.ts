@@ -22,6 +22,7 @@ export const useFileStore = defineStore("files", () => {
       return
     }
 
+    let updated = false
     for (const item of items) {
       const same = files.value.find((f) => f.hash === item.hash)
       if (same) {
@@ -33,6 +34,14 @@ export const useFileStore = defineStore("files", () => {
         ElMessage.warning(`文件已存在 \"${item.name}\"`)
       } else {
         files.value.push(item)
+        updated = true
+      }
+    }
+
+    if (updated) {
+      let index = 0
+      for (const item of filteredFiles.value) {
+        item.index = index++
       }
     }
   }
@@ -94,9 +103,8 @@ export const useFileStore = defineStore("files", () => {
   /**
    * 从磁盘读取刷新文件信息
    */
-  async function refresh() {
-    const files: FileItem[] = filteredFiles.value
-    for (const file of files) {
+  async function reload() {
+    for (const file of files.value) {
       try {
         file.error = ""
         await updateFile(file)
@@ -108,6 +116,17 @@ export const useFileStore = defineStore("files", () => {
         ElMessage.error(`文件 \"${file.name}\" 刷新失败. ${message}`)
       }
     }
+
+    // 更新引用，触发依赖项的更新，如序号的预览
+    files.value = [...files.value]
+  }
+
+  /**
+   * 更新依赖，触发响应式更新
+   */
+  function refresh() {
+    // 更新引用，触发依赖项的更新，如序号的预览
+    files.value = [...files.value]
   }
 
   async function updateFile(file: FileItem) {
@@ -148,6 +167,7 @@ export const useFileStore = defineStore("files", () => {
     addFiles,
     renamePreview,
     renameExecute,
+    reload,
     refresh,
     clear,
     updateIndex

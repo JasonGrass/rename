@@ -53,7 +53,7 @@ const onRefresh = async () => {
     return
   }
 
-  await fileStore.refresh()
+  await fileStore.reload()
   ElMessage.success("刷新完成");
 }
 

@@ -38,11 +38,7 @@ const { filteredFiles } = storeToRefs(fileStore)
 const isOnlyEffected = ref(false)
 
 const data = computed(() => {
-  // 初始化文件 Item 的索引计数
   const files = filteredFiles.value
-  for (let i = 0; i < files.length; i++) {
-    files[i].index = i
-  }
   if (isOnlyEffected.value) {
     return files.filter(f => f.name !== f.preview)
   }
@@ -107,6 +103,8 @@ const onSortChange = (args: any) => {
     item.index = i;
     fileStore.updateIndex(item)
   }
+
+  fileStore.refresh()
 }
 
 </script>
