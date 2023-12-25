@@ -69,18 +69,28 @@ export const useFileStore = defineStore("files", () => {
     failRenameCount.value = 0
     renameWorkingFile.value = undefined
 
+    const usedNames = new Set<string>()
     for (const file of files) {
       try {
         file.error = ""
         renameWorkingFile.value = file
         if (file.name === file.preview) {
           waitRenameCount.value -= 1
+          usedNames.add(file.name)
           continue
         }
+
+        if (usedNames.has(file.preview)) {
+          throw new Error(
+            `重命名拒绝执行，存在重复文件名称 "${file.preview}"；相同名称可能会造成文件被覆盖而丢失`
+          )
+        }
+
         await file.handle.move(file.preview)
         await updateFile(file)
         successRenameCount.value += 1
         waitRenameCount.value -= 1
+        usedNames.add(file.preview)
       } catch (e: any) {
         console.log("重命名失败", file.name)
         console.error(e)
