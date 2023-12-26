@@ -116,8 +116,7 @@ function isUserCancel(error: Error) {
 }
 
 export function calcHash(file: File, folder: string | undefined) {
-  folder = folder ? folder : ""
-  const s = `${file.name}${file.size}${file.lastModified}${folder}`
+  const s = `${file.name}${file.size}${file.lastModified}`
   return md5(s)
 }
 
