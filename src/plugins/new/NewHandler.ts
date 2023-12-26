@@ -1,6 +1,6 @@
 import { markRaw } from "vue"
 import { v4 as uuidv4 } from "uuid"
-import * as dayjs from "dayjs"
+import dayjs from "dayjs"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
 import NewConfiguration from "./NewConfiguration.vue"
