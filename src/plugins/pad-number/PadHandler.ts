@@ -20,7 +20,7 @@ interface IPadHandlerOptions {
 
 class Handler extends RenameHandlerBase<IPadHandlerOptions> implements IRenameHandler {
   public title: string = "序号补齐"
-  public component: Component = importPluginComponent("./pad-number/PadConfiguration.vue")
+  public component: Component = importPluginComponent("pad-number", "PadConfiguration")
 
   public sortHint = 3
 

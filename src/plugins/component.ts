@@ -6,10 +6,10 @@ import PluginLoadError from "@/components/Utils/PluginLoadError.vue"
 /**
  * 使用动态组件引入插件配置的组件
  */
-export function importPluginComponent(name: string) {
+export function importPluginComponent(folder: string, name: string) {
   return markRaw(
     defineAsyncComponent({
-      loader: () => import(`${name}`),
+      loader: () => import(`./${folder}/${name}.vue`),
       loadingComponent: PluginLoading,
       errorComponent: PluginLoadError,
       delay: 200,

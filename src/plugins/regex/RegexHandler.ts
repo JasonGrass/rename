@@ -8,7 +8,7 @@ interface IRegexHandlerOptions {
 
 class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRenameHandler {
   public title: string = "正则替换"
-  public component: Component = importPluginComponent("./regex/RegexConfiguration.vue")
+  public component: Component = importPluginComponent("regex", "RegexConfiguration")
   public sortHint = 100
 
   protected doRename(ctx: IRenameContext, options: IRegexHandlerOptions) {

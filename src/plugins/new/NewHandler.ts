@@ -131,7 +131,7 @@ class TimeReplace implements IVariableReplace {
 
 class Handler extends RenameHandlerBase<INewHandlerOptions> implements IRenameHandler {
   public title: string = "全新命名"
-  public component: Component = importPluginComponent("./new/NewConfiguration.vue")
+  public component: Component = importPluginComponent("new", "NewConfiguration")
   public sortHint = 4
 
   private _replaceWorker: IVariableReplace[] = [

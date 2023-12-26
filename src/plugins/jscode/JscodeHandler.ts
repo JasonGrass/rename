@@ -7,7 +7,7 @@ interface IJscodeConfiguration {
 
 class Handler extends RenameHandlerBase<IJscodeConfiguration> implements IRenameHandler {
   public title: string = "自定义 JS"
-  public component: Component = importPluginComponent("./jscode/JscodeConfiguration.vue")
+  public component: Component = importPluginComponent("jscode", "JscodeConfiguration")
   public sortHint = 101
 
   protected doRename(ctx: IRenameContext, options: IJscodeConfiguration) {

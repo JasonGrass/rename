@@ -22,7 +22,7 @@ interface IReplaceHandlerOptions {
 
 class Handler extends RenameHandlerBase<IReplaceHandlerOptions> implements IRenameHandler {
   public title: string = "删除/替换字符"
-  public component: Component = importPluginComponent("./replace/ReplaceConfiguration.vue")
+  public component: Component = importPluginComponent("replace", "ReplaceConfiguration")
   public sortHint = 1
 
   doRename(ctx: IRenameContext, options: IReplaceHandlerOptions) {
