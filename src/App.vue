@@ -10,6 +10,13 @@ onMounted(() => {
     return
   }
 
+  if (globalThis.location.protocol === "http:" && !globalThis.location.host.includes("localhost")) {
+    ElMessageBox.alert('文件加载相关 API 不支持 HTTP 协议，请使用 HTTPS 协议部署', 'http 协议不兼容', {
+      confirmButtonText: 'OK',
+    })
+    return
+  }
+
   const f = globalThis.showOpenFilePicker
   if (typeof f !== "function") {
     ElMessageBox.alert('当前浏览器尚未支持相关 API，请使用最新版本的 Edge 或 Chrome 浏览器', '浏览器不兼容', {
