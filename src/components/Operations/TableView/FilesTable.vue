@@ -7,7 +7,7 @@
     </div>
 
     <vxe-table :data="data" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件"
-      @sort-change="onSortChange" :row-class-name="rowClass">
+      @sort-change="onSortChange" :row-class-name="rowClass" ref="tableRef">
       <vxe-column field="index" :formatter="indexFormatter" title="序号" width="60" align="center"></vxe-column>
       <vxe-column field="name" class-name="text-pre" title="文件名" sortable align="left"></vxe-column>
       <!-- <vxe-column field="index" title="index" sortable align="left"></vxe-column> -->
@@ -106,6 +106,33 @@ const onSortChange = (args: any) => {
 
   fileStore.refresh()
 }
+
+const tableRef = ref(null)
+
+// 显示的数据变更之后（如更新了文件过滤条件），则重新更新 index
+watch(data, () => {
+  const table = tableRef.value as any
+  if (!table) {
+    return
+  }
+
+  nextTick(() => {
+    let anyChanged = false
+    const visibleData = table.getTableData().visibleData
+    for (let i = 0; i < visibleData.length; i++) {
+      const item = visibleData[i]
+      if (item.index !== i) {
+        item.index = i;
+        fileStore.updateIndex(item)
+        anyChanged = true
+      }
+    }
+    if (!anyChanged) {
+      return
+    }
+    fileStore.refresh()
+  })
+})
 
 </script>
 
