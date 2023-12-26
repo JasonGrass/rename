@@ -144,7 +144,7 @@ export const useFileStore = defineStore("files", () => {
     file.name = nf.name
     file.modifyTime = nf.lastModified
     file.size = nf.size
-    file.hash = calcHash(nf, file.folder)
+    file.hash = calcHash(nf)
   }
 
   /**

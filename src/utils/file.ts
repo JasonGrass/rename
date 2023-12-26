@@ -107,7 +107,7 @@ function buildFile(
     isValidName: false,
     error: "",
     index: 0,
-    hash: calcHash(file, folder)
+    hash: calcHash(file)
   }
 }
 
@@ -115,7 +115,7 @@ function isUserCancel(error: Error) {
   return error instanceof DOMException && error.code === 20 && error.name === "AbortError"
 }
 
-export function calcHash(file: File, folder: string | undefined) {
+export function calcHash(file: File) {
   const s = `${file.name}${file.size}${file.lastModified}`
   return md5(s)
 }
