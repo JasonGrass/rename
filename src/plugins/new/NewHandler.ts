@@ -99,7 +99,7 @@ class UuidReplace implements IVariableReplace {
 
 class DateReplace implements IVariableReplace {
   replace(ctx: IRenameContext, input: string): string {
-    const result = input.matchAll(/<date(\.now)?(\.modify)?(:\w+)?>/g)
+    const result = input.matchAll(/<date(\.now)?(\.modify)?(:.+)?>/g)
     for (const match of result) {
       let date = dayjs()
       const isModify = match[2] ? match[2] === ".modify" : false
@@ -115,7 +115,7 @@ class DateReplace implements IVariableReplace {
 
 class TimeReplace implements IVariableReplace {
   replace(ctx: IRenameContext, input: string): string {
-    const result = input.matchAll(/<time(\.now)?(\.modify)?(:\w+)?>/g)
+    const result = input.matchAll(/<time(\.now)?(\.modify)?(:.+)?>/g)
     for (const match of result) {
       let date = dayjs()
       const isModify = match[2] ? match[2] === ".modify" : false
