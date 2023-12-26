@@ -34,5 +34,7 @@ declare module 'vue' {
     Header: typeof import('./components/Header.vue')['default']
     Operations: typeof import('./components/Operations/Operations.vue')['default']
     OperationWrapper: typeof import('./components/Operations/OperationWrapper.vue')['default']
+    PluginLoadError: typeof import('./components/Utils/PluginLoadError.vue')['default']
+    PluginLoading: typeof import('./components/Utils/PluginLoading.vue')['default']
   }
 }

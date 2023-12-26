@@ -1,5 +1,5 @@
-import { markRaw, defineAsyncComponent } from "vue"
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
+import { importPluginComponent } from "../component"
 
 interface IPadHandlerOptions {
   /**
@@ -20,9 +20,8 @@ interface IPadHandlerOptions {
 
 class Handler extends RenameHandlerBase<IPadHandlerOptions> implements IRenameHandler {
   public title: string = "序号补齐"
-  public component: Component = markRaw(
-    defineAsyncComponent(() => import("./PadConfiguration.vue"))
-  )
+  public component: Component = importPluginComponent("./pad-number/PadConfiguration.vue")
+
   public sortHint = 3
 
   protected doRename(ctx: IRenameContext, options: IPadHandlerOptions) {

@@ -1,8 +1,7 @@
-import { markRaw, defineAsyncComponent } from "vue"
-
 import _ from "lodash"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
+import { importPluginComponent } from "../component"
 
 import xNumber from "./xNumber.js"
 
@@ -22,9 +21,7 @@ interface IInsertHandlerOptions {
 
 class Handler extends RenameHandlerBase<IInsertHandlerOptions> implements IRenameHandler {
   public title: string = "新增/插入字符"
-  public component: Component = markRaw(
-    defineAsyncComponent(() => import("./InsertConfiguration.vue"))
-  )
+  public component: Component = importPluginComponent("./insert/InsertConfiguration.vue")
   public sortHint = 2
 
   doRename(ctx: IRenameContext, options: IInsertHandlerOptions) {
