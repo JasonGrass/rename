@@ -33,6 +33,11 @@ ${code}`
  */
 async function detectPlugins(pluginSrc) {
   let dirs = await fs.readdir(pluginSrc)
+
+  dirs = dirs
+    .filter((dir) => !dir.startsWith(".")) // 过滤掉隐藏文件夹
+    .filter((dir) => !dir.match(/\.ts|\.js|\.vue$/)) // 过滤掉文件
+
   dirs = dirs.map((dir) => [dir, path.resolve(pluginSrc, dir)]) // [dirName, dirPath]
 
   const pluginFiles = []
