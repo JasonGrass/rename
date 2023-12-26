@@ -1,6 +1,5 @@
-import { markRaw } from "vue"
+import { markRaw, defineAsyncComponent } from "vue"
 
-import ReplaceConfiguration from "./ReplaceConfiguration.vue"
 import _ from "lodash"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
@@ -24,7 +23,9 @@ interface IReplaceHandlerOptions {
 
 class Handler extends RenameHandlerBase<IReplaceHandlerOptions> implements IRenameHandler {
   public title: string = "删除/替换字符"
-  public component: Component = markRaw(ReplaceConfiguration)
+  public component: Component = markRaw(
+    defineAsyncComponent(() => import("./ReplaceConfiguration.vue"))
+  )
   public sortHint = 1
 
   doRename(ctx: IRenameContext, options: IReplaceHandlerOptions) {

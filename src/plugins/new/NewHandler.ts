@@ -1,9 +1,8 @@
-import { markRaw } from "vue"
+import { markRaw, defineAsyncComponent } from "vue"
 import { v4 as uuidv4 } from "uuid"
 import dayjs from "dayjs"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
-import NewConfiguration from "./NewConfiguration.vue"
 
 interface INewHandlerOptions {
   pattern: string
@@ -132,7 +131,9 @@ class TimeReplace implements IVariableReplace {
 
 class Handler extends RenameHandlerBase<INewHandlerOptions> implements IRenameHandler {
   public title: string = "全新命名"
-  public component: Component = markRaw(NewConfiguration)
+  public component: Component = markRaw(
+    defineAsyncComponent(() => import("./NewConfiguration.vue"))
+  )
   public sortHint = 4
 
   private _replaceWorker: IVariableReplace[] = [

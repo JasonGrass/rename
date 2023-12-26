@@ -1,6 +1,5 @@
-import { markRaw } from "vue"
+import { markRaw, defineAsyncComponent } from "vue"
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
-import JscodeConfiguration from "./JscodeConfiguration.vue"
 
 interface IJscodeConfiguration {
   code: string
@@ -8,7 +7,9 @@ interface IJscodeConfiguration {
 
 class Handler extends RenameHandlerBase<IJscodeConfiguration> implements IRenameHandler {
   public title: string = "自定义 JS"
-  public component: Component = markRaw(JscodeConfiguration)
+  public component: Component = markRaw(
+    defineAsyncComponent(() => import("./JscodeConfiguration.vue"))
+  )
   public sortHint = 101
 
   protected doRename(ctx: IRenameContext, options: IJscodeConfiguration) {

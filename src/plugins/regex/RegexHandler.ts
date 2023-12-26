@@ -1,5 +1,4 @@
-import { markRaw } from "vue"
-import RegexConfiguration from "./RegexConfiguration.vue"
+import { markRaw, defineAsyncComponent } from "vue"
 
 import RenameHandlerBase from "@/lib/handler/RenameHandlerBase"
 
@@ -10,7 +9,9 @@ interface IRegexHandlerOptions {
 
 class Handler extends RenameHandlerBase<IRegexHandlerOptions> implements IRenameHandler {
   public title: string = "正则替换"
-  public component: Component = markRaw(RegexConfiguration)
+  public component: Component = markRaw(
+    defineAsyncComponent(() => import("./RegexConfiguration.vue"))
+  )
   public sortHint = 100
 
   protected doRename(ctx: IRenameContext, options: IRegexHandlerOptions) {
