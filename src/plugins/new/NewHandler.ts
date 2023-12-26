@@ -61,11 +61,16 @@ class ExtReplace implements IVariableReplace {
 
 class IndexNumberReplace implements IVariableReplace {
   replace(ctx: IRenameContext, input: string): string {
-    const result = input.matchAll(/<#+>/g)
+    const result = input.matchAll(/<#+(:\-?\d+)?>/g)
     for (const match of result) {
-      const index = match[0].length - 2
-      const number = (ctx.file.index + 1).toString().padStart(index, "0")
-      input = input.replace(match[0], number)
+      const length = match[0].match(/#+/)?.[0].length ?? 0 // 序号有多少位
+      const base = match[1] ? parseInt(match[1].slice(1)) : 1 // 序号的基数
+      const number = ctx.file.index + base
+      const numberStr =
+        number >= 0
+          ? number.toString().padStart(length, "0")
+          : "-" + (-number).toString().padStart(length - 1, "0")
+      input = input.replace(match[0], numberStr)
     }
     return input
   }

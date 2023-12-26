@@ -15,7 +15,8 @@
               :upper 或 :lower 转换大小写
             </span>
             <span class="content-line">
-              <span class="variable">&lt;#&gt;</span> 编号,固定位数则使用多个 #, 如 <span class="variable">&lt;####&gt;</span>
+              <span class="variable">&lt;#:1&gt;</span> 编号,基数为1(默认),固定位数则使用多个 #, 如 <span
+                class="variable">&lt;####&gt;</span>
             </span>
             <span class="content-line">
               <span class="variable">&lt;date&gt;</span>/<span class="variable">&lt;date.now&gt;</span> 当前日期;
