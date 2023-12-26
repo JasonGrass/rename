@@ -10,4 +10,11 @@ import PadHandler from "@/plugins/pad-number/PadHandler.ts"
 import RegexHandler from "@/plugins/regex/RegexHandler.ts"
 import ReplaceHandler from "@/plugins/replace/ReplaceHandler.ts"
 
+InsertHandler.id = "insert"
+JscodeHandler.id = "jscode"
+NewHandler.id = "new"
+PadHandler.id = "pad-number"
+RegexHandler.id = "regex"
+ReplaceHandler.id = "replace"
+
 export default [InsertHandler, JscodeHandler, NewHandler, PadHandler, RegexHandler, ReplaceHandler]

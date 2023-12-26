@@ -13,6 +13,9 @@ export function useRenameHandler() {
   const fileStore = useFileStore()
 
   const rename = (options: any) => {
+    // 执行之前，先排序，拖动列表可以改变执行规则的排序
+    handlers.sort((a, b) => a.sortHint - b.sortHint)
+
     // 对于当前选中的重命名操作，即使 enable，也先保存其配置
     const activeHandler = handlers.find((h) => h.active)
     if (activeHandler && options) {

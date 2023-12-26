@@ -30,6 +30,11 @@ interface IRenameHandler {
   sortHint: number
 
   /**
+   * 唯一标识
+   */
+  id: string
+
+  /**
    * 执行 rename 操作
    * @param ctx rename 上下文
    * @param options Handler 参数配置，如果为空则使用缓存的配置

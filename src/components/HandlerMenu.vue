@@ -1,54 +1,20 @@
 <template>
   <div>
 
-    <el-menu default-active="0" @select="onMenuSelected">
+    <el-menu :default-active="defaultActiveItemId" @select="onMenuSelected">
 
-      <el-menu-item v-for="(handler, index) of handlers" :index="index.toString()">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>{{ handler.title }}</span>
-        <span class="dot" v-show="handler.enable">
-        </span>
-      </el-menu-item>
-
-      <!--
-      <el-menu-item index="0">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>替换字符</span>
-      </el-menu-item>
-      <el-menu-item index="1">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>删除字符</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>新增/插入字符</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>转换字符</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>全新命名</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <el-icon>
-          <SetUp />
-        </el-icon>
-        <span>后缀名处理</span>
-      </el-menu-item> -->
+      <Container @drop="onDrop">
+        <Draggable v-for="handler of handlers" :key="handler.id">
+          <el-menu-item :index="handler.id">
+            <el-icon>
+              <SetUp />
+            </el-icon>
+            <span>{{ handler.title }}</span>
+            <span class="dot" v-show="handler.enable">
+            </span>
+          </el-menu-item>
+        </Draggable>
+      </Container>
 
     </el-menu>
 
@@ -56,23 +22,64 @@
 </template>
 
 <script lang="ts" setup>
+import { Container, Draggable } from "vue3-smooth-dnd";
+
 import { SetUp } from '@element-plus/icons-vue';
 import HandlerFactory from '@/lib/handler/HandlerFactory';
+import { useRenameHandler } from './Operations/Handlers/handler.flow';
 
-const handlers = HandlerFactory.handlers
+const { debounceRename } = useRenameHandler()
+
+const handlers = ref<IRenameHandler[]>(HandlerFactory.handlers)
+const defaultActiveItemId = ref("")
 
 const onMenuSelected = (index: string) => {
-  const current = handlers[Number(index)]
+  const current = handlers.value.find(h => h.id === index)
   if (!current) {
     return
   }
-  handlers.forEach(h => h.active = false)
+  handlers.value.forEach(h => h.active = false)
   current.active = true
 }
 
 onMounted(() => {
-  handlers[0].active = true
+  const list = handlers.value
+  if (list.length < 1) {
+    return
+  }
+  list[0].active = true
+  defaultActiveItemId.value = list[0].id
 })
+
+const onDrop = (dropResult: any) => {
+  handlers.value = applyDrag(handlers.value, dropResult);
+}
+
+const applyDrag = (arr: IRenameHandler[], dragResult: any) => {
+  const { removedIndex, addedIndex, payload } = dragResult;
+  if (removedIndex === null && addedIndex === null) return arr;
+  const result = [...arr];
+  let itemToAdd = payload;
+
+  if (removedIndex !== null) {
+    itemToAdd = result.splice(removedIndex, 1)[0];
+  }
+  if (addedIndex !== null) {
+    result.splice(addedIndex, 0, itemToAdd);
+  }
+
+  let sortHint = 1
+  for (const handler of result) {
+    handler.sortHint = sortHint++
+  }
+
+  // 修改排序之后，执行一次重命名预览
+  nextTick(() => {
+    debounceRename(undefined)
+  })
+
+  return result;
+}
 
 </script>
 

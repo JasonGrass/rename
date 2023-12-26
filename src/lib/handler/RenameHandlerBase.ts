@@ -9,6 +9,7 @@ export default abstract class RenameHandlerBase<T> implements Partial<IRenameHan
   public active: boolean = false
   public enable: boolean = false
   public containExt: boolean = false
+  public id: string = ""
 
   public setOptions(options: T) {
     if (options) {

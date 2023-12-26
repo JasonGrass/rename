@@ -29,7 +29,7 @@ ${code}`
 }
 
 /**
- * 从插件目录中，找到所有处理重名的 Handler 文件
+ * 从插件目录中，找到所有处理重命名的 Handler 文件
  */
 async function detectPlugins(pluginSrc) {
   let dirs = await fs.readdir(pluginSrc)
@@ -57,6 +57,12 @@ async function generateImportCode(pluginsDir) {
     importCode += `import ${fileNameWithoutExt} from "@/plugins/${pluginDirName}/${handlerFileName}"\n`
   }
 
+  let setIdCode = ""
+  for (const [pluginDirName, handlerFileName] of pluginsDir) {
+    const fileNameWithoutExt = handlerFileName.slice(0, -3)
+    setIdCode += `${fileNameWithoutExt}.id = "${pluginDirName}"\n`
+  }
+
   const arrayCode = pluginsDir
     .map(([_, handlerFile]) => handlerFile)
     .map((fileName) => fileName.slice(0, -3))
@@ -64,6 +70,7 @@ async function generateImportCode(pluginsDir) {
 
   return `
 ${importCode}
+${setIdCode}
 export default [${arrayCode}]
 `
 }
