@@ -24,13 +24,15 @@
 
 批量重命名是一个低频但时不时又会遇到的需求，为此专门下载一个软件过于大费周章。都 3202 年了，应该可以用 web 来做了吧。果然发现了相关的 API，于是有了这个在线工具。
 
-## 🍉 浏览器兼容问题
+## 🍉 浏览器兼容 & 已知问题
 
 因为使用了实验性的 API，浏览器兼容会有问题。如果发现功能有问题，请使用最新版 Edge/Chrome 浏览器。
 
 ["showOpenFilePicker" | Can I use...](https://caniuse.com/?search=showOpenFilePicker )
 
-[FileSystemFileHandle.move() for local files - Chrome Platform Status](https://chromestatus.com/feature/6271579653144576 )
+核心 API：[FileSystemFileHandle.move() for local files - Chrome Platform Status](https://chromestatus.com/feature/6271579653144576 )
+
+**已知问题**：`FileSystemFileHandle.move` 方法对文件进行重命名时，会更改文件的“修改时间”，而手动重命名或使用本地重命名工具，不会有这个问题。
 
 ## 🍉 高级技巧
 
