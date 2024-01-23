@@ -18,11 +18,13 @@ onMounted(() => {
   }
 
   const f = globalThis.showOpenFilePicker
-  if (typeof f !== "function") {
+  const chromeVersion = getChromeVersion()
+  if (typeof f !== "function" || chromeVersion < 112) {
     ElMessageBox.alert('当前浏览器尚未支持相关 API，请使用最新版本的 Edge 或 Chrome 浏览器', '浏览器不兼容', {
       confirmButtonText: 'OK',
     })
   }
+
 })
 
 const checkIsMobile = () => {
@@ -30,6 +32,13 @@ const checkIsMobile = () => {
     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
   );
   return Boolean(flag);
+}
+
+function getChromeVersion(): number {
+  const userAgent = globalThis.navigator.userAgent
+  var regExp = /Chrome\/([0-9.]+)/;
+  var match = userAgent.match(regExp);
+  return match ? parseInt(match[1], 10) : 0;
 }
 
 const onGithubClick = () => {
