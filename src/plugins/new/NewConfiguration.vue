@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-input v-model="pattern" placeholder="输入全新的命名规则，使用 <> 引用变量，如果 <name>，点击 Help 查看帮助 →→→→"></el-input>
+    <el-input v-model="pattern" placeholder="输入全新的命名规则，使用 <> 引用变量，如 <name>，点击右侧 Help 查看帮助（再次点击 Help 隐藏）"></el-input>
     <el-button type="primary" @click="onHelpClick">Help</el-button>
   </div>
 
