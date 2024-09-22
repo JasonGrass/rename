@@ -6,31 +6,69 @@
       <el-checkbox v-model="isOnlyEffected" label="仅显示受影响的文件" border />
     </div>
 
-    <vxe-table :data="data" class="table" max-height="300%" stripe border="inner" empty-text="尚未加载任何文件"
-      @sort-change="onSortChange" :row-class-name="rowClass" ref="tableRef">
-      <vxe-column field="index" :formatter="indexFormatter" title="序号" width="60" align="center"></vxe-column>
-      <vxe-column field="name" class-name="text-pre" title="文件名" sortable align="left"></vxe-column>
+    <vxe-table
+      :data="data"
+      class="table"
+      max-height="300%"
+      stripe
+      border="inner"
+      empty-text="尚未加载任何文件"
+      @sort-change="onSortChange"
+      :row-class-name="rowClass"
+      ref="tableRef">
+      <vxe-column
+        field="index"
+        :formatter="indexFormatter"
+        title="序号"
+        width="60"
+        align="center"></vxe-column>
+      <vxe-column
+        field="name"
+        class-name="text-pre"
+        title="文件名"
+        sortable
+        align="left"></vxe-column>
       <!-- <vxe-column field="index" title="index" sortable align="left"></vxe-column> -->
-      <vxe-column :visible="!isOnlyPreview" field="modifyTime" :formatter="timeFormater" title="修改时间" width="180" sortable
+      <vxe-column
+        :visible="!isOnlyPreview"
+        field="modifyTime"
+        :formatter="timeFormater"
+        title="修改时间"
+        width="180"
+        sortable
         align="center"></vxe-column>
       <!-- <vxe-column :visible="!isOnlyPreview" field="createTime" :formatter="timeFormater" title="创建时间" width="180" sortable
         align="center"></vxe-column> -->
-      <vxe-column :visible="!isOnlyPreview" field="size" :formatter="sizeFormatter" title="大小" width="100" sortable
+      <vxe-column
+        :visible="!isOnlyPreview"
+        field="size"
+        :formatter="sizeFormatter"
+        title="大小"
+        width="100"
+        sortable
         align="center"></vxe-column>
-      <vxe-column :visible="isShowFolder && !isOnlyPreview" field="folder" title="目录" sortable align="right"></vxe-column>
-      <vxe-column field="preview" title="预览" align="left" :class-name="previewCellClass"></vxe-column>
-
+      <vxe-column
+        :visible="isShowFolder && !isOnlyPreview"
+        field="folder"
+        title="目录"
+        sortable
+        align="right"></vxe-column>
+      <vxe-column
+        field="preview"
+        title="预览"
+        sortable
+        align="left"
+        :class-name="previewCellClass"></vxe-column>
     </vxe-table>
-
   </div>
 </template>
 
 <script lang="ts" setup>
-import { formatFileSize, formatDate } from "@/utils/formatter";
-import { VxeColumnPropTypes } from 'vxe-table'
+import { formatFileSize, formatDate } from "@/utils/formatter"
+import { VxeColumnPropTypes } from "vxe-table"
 
-import { useFileStore } from '@/store/files';
-import { storeToRefs } from "pinia";
+import { useFileStore } from "@/store/files"
+import { storeToRefs } from "pinia"
 
 const fileStore = useFileStore()
 const { filteredFiles } = storeToRefs(fileStore)
@@ -40,9 +78,8 @@ const isOnlyEffected = ref(false)
 const data = computed(() => {
   const files = filteredFiles.value
   if (isOnlyEffected.value) {
-    return files.filter(f => f.name !== f.preview)
-  }
-  else {
+    return files.filter((f) => f.name !== f.preview)
+  } else {
     return files
   }
 })
@@ -76,18 +113,17 @@ const previewCellClass = (args: any) => {
 }
 
 const rowClass = (args: any) => {
-  const fileItem = args.row as FileItem;
+  const fileItem = args.row as FileItem
   if (!fileItem) {
     return ""
   }
-  const seq = args.seq as number; // 当前布局上的表格序号
+  const seq = args.seq as number // 当前布局上的表格序号
 
   if (fileItem.name !== fileItem.preview) {
     // 相邻两行是否不同的颜色标记
     if (seq % 2 === 1) {
       return "row-name-changed-color-1"
-    }
-    else {
+    } else {
       return "row-name-changed-color-2"
     }
   }
@@ -95,12 +131,12 @@ const rowClass = (args: any) => {
 }
 
 const onSortChange = (args: any) => {
-  const table = args.$table;
+  const table = args.$table
   const visibleData = table.getTableData().visibleData // 排序结果
 
   for (let i = 0; i < visibleData.length; i++) {
     const item = visibleData[i]
-    item.index = i;
+    item.index = i
     fileStore.updateIndex(item)
   }
 
@@ -122,7 +158,7 @@ watch(data, () => {
     for (let i = 0; i < visibleData.length; i++) {
       const item = visibleData[i]
       if (item.index !== i) {
-        item.index = i;
+        item.index = i
         fileStore.updateIndex(item)
         anyChanged = true
       }
@@ -133,14 +169,12 @@ watch(data, () => {
     fileStore.refresh()
   })
 })
-
 </script>
 
 <style lang="less" scoped>
 .table {
   min-width: 10%;
   max-width: 99%;
-
 }
 
 .filters {
@@ -154,12 +188,12 @@ watch(data, () => {
 
 <style>
 .invalid-filename {
-  color: #F56C6C
+  color: #f56c6c;
 }
 
 .text-pre {
   .vxe-cell--label {
-    white-space: pre
+    white-space: pre;
   }
 }
 
@@ -171,4 +205,3 @@ tr.row-name-changed-color-2 {
   background-color: #c6e2ff !important;
 }
 </style>
-
